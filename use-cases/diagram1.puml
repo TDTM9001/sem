@@ -1,0 +1,24 @@
+@startuml
+
+title
+USE CASE: 1 Produce a Report showing All the countries in the world
+organised by largest population to smallest.
+end title
+
+actor PR as "Population Researcher"
+
+rectangle Database
+
+rectangle "System" {
+    usecase UC1 as "Get countries
+    from Database"
+
+    usecase UCa as "Sort from largest
+    to smallest"
+
+    PR - UC1
+    UC1 ..> UCa : include
+    UC1 - Database
+}
+
+@enduml
