@@ -1,0 +1,32 @@
+@startuml
+
+title
+USE CASE: 4 Produce a Report showing The top 'N' populated countries
+in the world where 'N' is provided by the user.
+end title
+
+actor PR as "Population Researcher"
+
+rectangle Database
+
+rectangle "System" {
+    usecase UC1 as "Get countries
+    from Database"
+
+    usecase UCa as "Sort by population from
+    largest to smallest"
+
+    usecase UCb as "Truncate search to the
+    top 'N' results"
+
+    usecase UCc as "Return error if 'N' is
+    invaild input"
+
+    PR - UC1
+    UC1 ..> UCa : include
+    UC1 ..> UCb : include
+    UC1 <.. UCc : extend
+    UC1 - Database
+}
+
+@enduml
