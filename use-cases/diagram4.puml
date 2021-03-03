@@ -20,7 +20,7 @@ rectangle "System" {
     top 'N' results"
 
     usecase UCc as "Return error if 'N' is
-    invaild input"
+    invalid input"
 
     PR - UC1
     UC1 ..> UCa : include

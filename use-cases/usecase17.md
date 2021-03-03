@@ -28,7 +28,7 @@ No report is produced.
 
 ### Primary Actor
 
-Population Resarcher.
+Population Researcher.
 
 ### Trigger
 
