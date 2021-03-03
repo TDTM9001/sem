@@ -4,7 +4,7 @@
 
 ### Goal in Context
 
-As an *Population  Researcher* I want *to produce a report showing The population of a country.* so that *I can support population reporting of the organisation.*
+As a *Population  Researcher* I want *to produce a report showing The population of a country.* so that *I can support population reporting of the organisation.*
 
 ### Scope
 

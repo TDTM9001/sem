@@ -4,7 +4,7 @@
 
 ### Goal in Context
 
-As an *Population  Researcher* I want *to produce a report showing The number of people who speak Chinese, English, Hindi, Spanish, and Arabic. From greatest number to smallest, including the percentage of the world population.* so that *I can support population reporting of the organisation.*
+As a *Population  Researcher* I want *to produce a report showing The number of people who speak Chinese, English, Hindi, Spanish, and Arabic. From greatest number to smallest, including the percentage of the world population.* so that *I can support population reporting of the organisation.*
 
 ### Scope
 

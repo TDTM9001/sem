@@ -4,7 +4,7 @@
 
 ### Goal in Context
 
-As an *Population  Researcher* I want *to produce a report showing The population of people, people living in cities, and people not living in cities in each continent.* so that *I can support population reporting of the organisation.*
+As a *Population  Researcher* I want *to produce a report showing The population of people, people living in cities, and people not living in cities in each continent.* so that *I can support population reporting of the organisation.*
 
 ### Scope
 
