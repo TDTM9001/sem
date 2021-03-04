@@ -56,4 +56,24 @@ public class Country extends Location{
 
         return return_countries;
     }
+    /*
+    Returns every country in a region
+    Loops through every country and if region = user input then add to arraylist
+    Convert back to array and return
+     */
+    public static Country[] getAllByRegion(String region, Country[] countries) {
+        ArrayList<Country> found_countries = new ArrayList<Country>();
+        region = region.toLowerCase();
+
+        for(Country c : countries) {
+            if(c.getRegion().toLowerCase().equals(region)){
+                found_countries.add(c);
+            }
+        }
+
+        Country[] return_countries = new Country[found_countries.size()];
+        return_countries = found_countries.toArray(return_countries);
+
+        return return_countries;
+    }
 }
