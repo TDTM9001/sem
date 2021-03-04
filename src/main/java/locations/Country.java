@@ -65,17 +65,22 @@ public class Country extends Location{
     public static Country[] getAllByRegion(String region, Country[] countries) {
         ArrayList<Country> found_countries = new ArrayList<Country>();
         region = region.toLowerCase();
+        boolean found = false;
 
         for(Country c : countries) {
             if(c.getRegion().toLowerCase().equals(region)){
                 found_countries.add(c);
+                found = true;
             }
         }
+        if(found) {
+            Country[] return_countries = new Country[found_countries.size()];
+            return_countries = found_countries.toArray(return_countries);
 
-        Country[] return_countries = new Country[found_countries.size()];
-        return_countries = found_countries.toArray(return_countries);
-
-        return return_countries;
+            return return_countries;
+        }else{
+            return null;
+        }
     }
     /*
     Sorts array and returns top n elements
@@ -85,19 +90,37 @@ public class Country extends Location{
         int size = new_countries.length;
         return Arrays.copyOfRange(new_countries,size-n, size);
     }
+    /*
+    Selects top n elements from all countries with continent = user input
+    Returns null if user input is invalid
+     */
     public static Country[] topNCountriesContinent(int n,String continent, Country[] countries){
-        Country[] new_countries = getAllByContinent(continent, countries);
         try{
+            Country[] new_countries = sortByPopulation(getAllByContinent(continent, countries));
             int size = new_countries.length;
             return Arrays.copyOfRange(new_countries, size-n, size);
-        }catch(NullPointerException e){
+        }catch(Exception e){
             return null;
         }
 
     }
-    public static Country[] topNCountriesRegion(){
-
+    /*s
+        Selects top n elements from all countries with region = user input
+        Returns null if user input is invalid
+    */
+    public static Country[] topNCountriesRegion(int n, String region, Country[] countries){
+        try{
+            Country[] new_countries = sortByPopulation(getAllByRegion(region, countries));
+            int size = new_countries.length;
+            return Arrays.copyOfRange(new_countries, size-n, size);
+        }catch(Exception e){
+            return null;
+        }
     }
+
+    /*
+    Bubble sort in ascending order
+     */
     public static Country[] sortByPopulation(Country[] countries){
         int n = countries.length;
         for(int i=0; i<n-1; i++){
