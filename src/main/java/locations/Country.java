@@ -85,8 +85,15 @@ public class Country extends Location{
         int size = new_countries.length;
         return Arrays.copyOfRange(new_countries,size-n, size);
     }
-    public static Country[] topNCountriesContinent(){
-        
+    public static Country[] topNCountriesContinent(int n,String continent, Country[] countries){
+        Country[] new_countries = getAllByContinent(continent, countries);
+        try{
+            int size = new_countries.length;
+            return Arrays.copyOfRange(new_countries, size-n, size);
+        }catch(NullPointerException e){
+            return null;
+        }
+
     }
     public static Country[] topNCountriesRegion(){
 
