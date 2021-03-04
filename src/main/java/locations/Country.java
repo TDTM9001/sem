@@ -1,6 +1,7 @@
 package locations;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Country extends Location{
 
@@ -76,4 +77,32 @@ public class Country extends Location{
 
         return return_countries;
     }
+    /*
+    Sorts array and returns top n elements
+     */
+    public static Country[] topNCountriesWorld(int n, Country[] countries){
+        Country[] new_countries = sortByPopulation(countries);
+        int size = new_countries.length;
+        return Arrays.copyOfRange(new_countries,size-n, size);
+    }
+    public static Country[] topNCountriesContinent(){
+        
+    }
+    public static Country[] topNCountriesRegion(){
+
+    }
+    public static Country[] sortByPopulation(Country[] countries){
+        int n = countries.length;
+        for(int i=0; i<n-1; i++){
+            for(int j=0; j<n-i-1; j++){
+                if(countries[j].getPopulation() > countries[j+1].getPopulation()){
+                    Country temp_country = countries[j];
+                    countries[j] = countries[j+1];
+                    countries[j+1] = temp_country;
+                }
+            }
+        }
+        return countries;
+    }
+
 }

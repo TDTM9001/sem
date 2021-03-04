@@ -26,7 +26,7 @@ public class Location {
     /*
     Bubble sort to sort by population ascending
      */
-    public static void sort_population(Location[] locations){
+    public static Location[] sort_population(Location[] locations){
         int n = locations.length;
         for(int i=0; i<n-1; i++){
             for(int j=0; j<n-i-1; j++){
@@ -37,6 +37,7 @@ public class Location {
                 }
             }
         }
+        return locations;
     }
 
 }
