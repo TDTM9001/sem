@@ -3,33 +3,36 @@ package locations;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Country extends Location{
-
+public class Country{
+    private String name;
+    private int population;
+    private String code;
     private String continent;
     private String region;
     private int capitalCode;
 
     public Country(String name, int population, String code, String continent, String region, int capitalCode){
-        super(name, population, code);
+        this.name = name;
+        this.population = population;
+        this.code = code;
         this.continent = continent;
         this.region = region;
         this.capitalCode = capitalCode;
     }
-
-    public String getContinent(){
-        return this.continent;
-    }
-    public String getRegion(){
-        return this.region;
-    }
-    public int getCapitalCode(){
-        return this.capitalCode;
-    }
+    /*
+    getters
+     */
+    public String getContinent(){ return this.continent; }
+    public String getRegion(){ return this.region; }
+    public int getCapitalCode(){ return this.capitalCode; }
+    public String getName(){ return this.name; }
+    public int getPopulation(){ return this.population; }
+    public String getCode(){ return this.code; }
 
     /*
     Validates user input and adds only countries with continent to return
      */
-    public static Country[] getAllByContinent(String continent, Country[] countries){
+    public static Country[] getAllByContinent(int howMany, String continent, Country[] countries){
 
         String[] allowed_continents = {"asia","europe","north america","africa","oceania","antarctica","south america"};
         boolean found = false;
@@ -55,14 +58,18 @@ public class Country extends Location{
         Country[] return_countries = new Country[found_countries.size()];
         return_countries = found_countries.toArray(return_countries);
 
-        return return_countries;
+        if(howMany == 0){
+            return sortByPopulation(return_countries);
+        }else{
+            return topNCountries(howMany, return_countries);
+        }
     }
     /*
     Returns every country in a region
     Loops through every country and if region = user input then add to arraylist
     Convert back to array and return
      */
-    public static Country[] getAllByRegion(String region, Country[] countries) {
+    public static Country[] getAllByRegion(int howMany, String region, Country[] countries) {
         ArrayList<Country> found_countries = new ArrayList<Country>();
         region = region.toLowerCase();
         boolean found = false;
@@ -76,8 +83,11 @@ public class Country extends Location{
         if(found) {
             Country[] return_countries = new Country[found_countries.size()];
             return_countries = found_countries.toArray(return_countries);
-
-            return return_countries;
+            if(howMany == 0){
+                return sortByPopulation(return_countries);
+            }else{
+                return topNCountries(howMany, return_countries);
+            }
         }else{
             return null;
         }
@@ -85,39 +95,11 @@ public class Country extends Location{
     /*
     Sorts array and returns top n elements
      */
-    public static Country[] topNCountriesWorld(int n, Country[] countries){
+    public static Country[] topNCountries(int n, Country[] countries){
         Country[] new_countries = sortByPopulation(countries);
         int size = new_countries.length;
         return Arrays.copyOfRange(new_countries,size-n, size);
     }
-    /*
-    Selects top n elements from all countries with continent = user input
-    Returns null if user input is invalid
-     */
-    public static Country[] topNCountriesContinent(int n,String continent, Country[] countries){
-        try{
-            Country[] new_countries = sortByPopulation(getAllByContinent(continent, countries));
-            int size = new_countries.length;
-            return Arrays.copyOfRange(new_countries, size-n, size);
-        }catch(Exception e){
-            return null;
-        }
-
-    }
-    /*s
-        Selects top n elements from all countries with region = user input
-        Returns null if user input is invalid
-    */
-    public static Country[] topNCountriesRegion(int n, String region, Country[] countries){
-        try{
-            Country[] new_countries = sortByPopulation(getAllByRegion(region, countries));
-            int size = new_countries.length;
-            return Arrays.copyOfRange(new_countries, size-n, size);
-        }catch(Exception e){
-            return null;
-        }
-    }
-
     /*
     Bubble sort in ascending order
      */
