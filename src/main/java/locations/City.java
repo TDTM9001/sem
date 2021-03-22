@@ -32,6 +32,85 @@ public class City{
     }
 
     /*
+    find capital code of each country, linear search until city code = capital code
+    return top n cities
+     */
+    public static City[] getAllCapitals(int howMany, Country[] countries, City[] cities) {
+        City[] capitals = new City[countries.length];
+        int index = 0;
+
+        for(Country c : countries){
+            for(City ci : cities){
+                if(c.getCapitalCode() == ci.getId()){
+                    capitals[index] = ci;
+                    break;
+                }
+            }
+            index++;
+        }
+        if(howMany == 0) {
+            return sortByPopulation(capitals);
+        }else{
+            return topNCities(howMany, capitals);
+        }
+    }
+    /*
+    find capital code of each country in region, linear search until city code = capital code
+    return top n cities
+     */
+    public static City[] getAllCapitalsByRegion(int howMany, Country[] countries, City[] cities, String region){
+        Country[] inRegion = Country.getAllByRegion(0,region, countries);
+
+        if (inRegion != null) {
+            City[] capitals = new City[inRegion.length];
+            int index = 0;
+            for(Country c : inRegion){
+                for(City ci : cities){
+                    if(c.getCapitalCode() == ci.getId()){
+                        capitals[index] = ci;
+                    }
+                }
+                index++;
+            }
+            if(howMany == 0){
+                return sortByPopulation(capitals);
+            }else{
+                return topNCities(howMany, capitals);
+            }
+        }else{
+            return null;
+        }
+    }
+    /*
+    find capital code of each country in continent, linear search until city code = capital code
+    return top n cities
+     */
+    public static City[] getAllCapitalsByContinent(int howMany, Country[] countries, City[] cities, String continent) {
+        Country[] contCountries = Country.getAllByContinent(0, continent, countries);
+        City[] contCities = getAllByContinent(0,cities, continent, countries);
+
+        if (contCountries != null) {
+            City[] capitals = new City[contCountries.length];
+            int index = 0;
+            for(Country c : contCountries){
+                for(City ci : contCities){
+                    if(c.getCapitalCode() == ci.getId()){
+                        capitals[index] = ci;
+                    }
+                }
+                index++;
+            }
+            if(howMany == 0){
+                return sortByPopulation(capitals);
+            }else{
+                return topNCities(howMany,capitals);
+            }
+        }
+
+        return null;
+    }
+
+    /*
     find each city in country, in continent and return top n results
      */
     public static City[] getAllByContinent(int howMany, City[] cities, String continent, Country[] countries) {
