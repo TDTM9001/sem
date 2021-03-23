@@ -22,8 +22,8 @@ public class City{
     getters
      */
     public String getName() { return this.name; }
-    private int getPopulation(){ return this.population; }
-    private String getCountryCode(){ return this.countryCode; }
+    public int getPopulation(){ return this.population; }
+    public String getCountryCode(){ return this.countryCode; }
     public int getId(){
         return this.id;
     }
