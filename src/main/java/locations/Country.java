@@ -29,6 +29,59 @@ public class Country{
     public int getPopulation(){ return this.population; }
     public String getCode(){ return this.code; }
 
+    public static long[] popByCountry(Country c, City[] cities, Country[] countries){
+        City[] allInCountry = City.getAllByCountry(0, cities, c.getName(), countries);
+        long sumCities = 0;
+        for(City ci : allInCountry){
+            sumCities += ci.getPopulation();
+        }
+        return new long[]{sumCities, c.getPopulation()-sumCities};
+    }
+
+    /*
+    Get sum of all cities, countries in continent
+    return [sum cities, sum countries - sum cities]
+     */
+    public static long[] popByContinent(String continent, Country[] countries, City[] cities){
+        City[] citiesInContinent = City.getAllByContinent(0, cities, continent, countries);
+        Country[] countriesInContinent = getAllByContinent(0, continent, countries);
+
+        long sumCities = 0;
+        long sumCountries = 0;
+
+        for(City c : citiesInContinent){
+            sumCities += c.getPopulation();
+        }
+        if (countriesInContinent != null) {
+            for(Country c : countriesInContinent){
+                sumCountries += c.getPopulation();
+            }
+        }
+        return new long[]{sumCities, (sumCountries-sumCities)};
+    }
+
+    /*
+    Get sum of all cities, countries in region
+    return [sum cities, sum countries - sum cities]
+     */
+    public static long[] popByRegion(String region, Country[] countries, City[] cities){
+        City[] citiesInRegion = City.getAllByRegion(0, cities, region, countries);
+        Country[] countriesInRegion = getAllByRegion(0, region, countries);
+
+        long sumCities = 0;
+        long sumCountries = 0;
+
+        for(City c : citiesInRegion){
+            sumCities += c.getPopulation();
+        }
+        if (countriesInRegion != null) {
+            for(Country c : countriesInRegion){
+                sumCountries += c.getPopulation();
+            }
+        }
+        return new long[]{sumCities, (sumCountries-sumCities)};
+    }
+
     /*
     Validates user input and adds only countries with continent to return
      */
