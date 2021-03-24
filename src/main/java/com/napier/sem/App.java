@@ -146,7 +146,7 @@ public class App
                 System.out.println("SQLState: " + ex.getSQLState());
                 System.out.println("VendorError: " + ex.getErrorCode());
             }
-            return cities;
+            return null;
         }
         else {
             return null;
