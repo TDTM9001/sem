@@ -77,13 +77,25 @@ public class App
         {
             Statement stmt = null;
             ResultSet rs = null;
+            int length = 0;
             try {
                 stmt = con.createStatement();
-                rs = stmt.executeQuery("SELECT ID,Name,CountryCode FROM city");
-                while(rs.next())
-                {
-                    String str = "ID: " + String.valueOf(rs.getInt(1)) + ", Name: " + rs.getString(2);
-                    System.out.println(str);
+                rs = stmt.executeQuery("SELECT COUNT(*) FROM country");
+                length = rs.getInt(1);
+            }
+            catch (SQLException ex) {
+                // handle any errors
+                System.out.println("SQLException: " + ex.getMessage());
+                System.out.println("SQLState: " + ex.getSQLState());
+                System.out.println("VendorError: " + ex.getErrorCode());
+            }
+            Country[] countries = new Country[length];
+            try {
+                stmt = con.createStatement();
+                rs = stmt.executeQuery("SELECT * FROM country");
+                int counter = 0;
+                while(rs.next()) {
+                    counter++;
                 }
             }
             catch (SQLException ex){
@@ -92,6 +104,10 @@ public class App
                 System.out.println("SQLState: " + ex.getSQLState());
                 System.out.println("VendorError: " + ex.getErrorCode());
             }
+            return null;
+        }
+        else {
+            return null;
         }
     }
 
@@ -101,12 +117,27 @@ public class App
         {
             Statement stmt = null;
             ResultSet rs = null;
+            int length = 0;
+            try {
+                stmt = con.createStatement();
+                rs = stmt.executeQuery("SELECT COUNT(*) FROM city");
+                length = rs.getInt(1);
+            }
+            catch (SQLException ex) {
+                // handle any errors
+                System.out.println("SQLException: " + ex.getMessage());
+                System.out.println("SQLState: " + ex.getSQLState());
+                System.out.println("VendorError: " + ex.getErrorCode());
+            }
+            City[] cities = new City[length];
             try {
                 stmt = con.createStatement();
                 rs = stmt.executeQuery("SELECT * FROM city");
-                while(rs.next())
-                {
-
+                int counter = 0;
+                while(rs.next()) {
+                    City temp = new City(rs.getString("Name"), rs.getInt("Population"), rs.getString("CountryCode"), rs.getInt("ID"), rs.getString("District"));
+                    cities[counter] = temp;
+                    counter++;
                 }
             }
             catch (SQLException ex){
@@ -115,6 +146,10 @@ public class App
                 System.out.println("SQLState: " + ex.getSQLState());
                 System.out.println("VendorError: " + ex.getErrorCode());
             }
+            return cities;
+        }
+        else {
+            return null;
         }
     }
 
@@ -124,13 +159,27 @@ public class App
         {
             Statement stmt = null;
             ResultSet rs = null;
+            int length = 0;
             try {
                 stmt = con.createStatement();
-                rs = stmt.executeQuery("SELECT ID,Name,CountryCode FROM city");
-                while(rs.next())
-                {
-                    String str = "ID: " + String.valueOf(rs.getInt(1)) + ", Name: " + rs.getString(2);
-                    System.out.println(str);
+                rs = stmt.executeQuery("SELECT COUNT(*) FROM city");
+                length = rs.getInt(1);
+            }
+            catch (SQLException ex) {
+                // handle any errors
+                System.out.println("SQLException: " + ex.getMessage());
+                System.out.println("SQLState: " + ex.getSQLState());
+                System.out.println("VendorError: " + ex.getErrorCode());
+            }
+            City[] cities = new City[length];
+            try {
+                stmt = con.createStatement();
+                rs = stmt.executeQuery("SELECT * FROM city");
+                int counter = 0;
+                while(rs.next()) {
+                    City temp = new City(rs.getString("Name"), rs.getInt("Population"), rs.getString("CountryCode"), rs.getInt("ID"), rs.getString("District"));
+                    cities[counter] = temp;
+                    counter++;
                 }
             }
             catch (SQLException ex){
@@ -139,6 +188,10 @@ public class App
                 System.out.println("SQLState: " + ex.getSQLState());
                 System.out.println("VendorError: " + ex.getErrorCode());
             }
+            return null;
+        }
+        else {
+            return null;
         }
     }
 
