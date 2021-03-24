@@ -42,7 +42,7 @@ public class App
             }
             catch (SQLException sqle)
             {
-                System.out.println("Failed to connect to database attempt " + Integer.toString(i));
+                System.out.println("Failed to connect to database attempt " + i);
                 System.out.println(sqle.getMessage());
             }
             catch (InterruptedException ie)
@@ -75,12 +75,13 @@ public class App
     {
         if (con != null)
         {
-            Statement stmt = null;
-            ResultSet rs = null;
+            Statement stmt;
+            ResultSet rs;
             int length = 0;
             try {
                 stmt = con.createStatement();
                 rs = stmt.executeQuery("SELECT COUNT(*) FROM country");
+                rs.next();
                 length = rs.getInt(1);
             }
             catch (SQLException ex) {
@@ -95,6 +96,8 @@ public class App
                 rs = stmt.executeQuery("SELECT * FROM country");
                 int counter = 0;
                 while(rs.next()) {
+                    Country temp = new Country(rs.getString("Name"), rs.getInt("Population"), rs.getString("Code"), rs.getString("Continent"), rs.getString("Region"), rs.getInt("Capital"));
+                    countries[counter] = temp;
                     counter++;
                 }
             }
@@ -115,12 +118,13 @@ public class App
     {
         if (con != null)
         {
-            Statement stmt = null;
-            ResultSet rs = null;
+            Statement stmt;
+            ResultSet rs;
             int length = 0;
             try {
                 stmt = con.createStatement();
                 rs = stmt.executeQuery("SELECT COUNT(*) FROM city");
+                rs.first();
                 length = rs.getInt(1);
             }
             catch (SQLException ex) {
@@ -129,6 +133,7 @@ public class App
                 System.out.println("SQLState: " + ex.getSQLState());
                 System.out.println("VendorError: " + ex.getErrorCode());
             }
+            System.out.println(length);
             City[] cities = new City[length];
             try {
                 stmt = con.createStatement();
@@ -157,12 +162,13 @@ public class App
     {
         if (con != null)
         {
-            Statement stmt = null;
-            ResultSet rs = null;
+            Statement stmt;
+            ResultSet rs;
             int length = 0;
             try {
                 stmt = con.createStatement();
-                rs = stmt.executeQuery("SELECT COUNT(*) FROM city");
+                rs = stmt.executeQuery("SELECT COUNT(*) FROM countrylanguage");
+                rs.next();
                 length = rs.getInt(1);
             }
             catch (SQLException ex) {
@@ -171,14 +177,14 @@ public class App
                 System.out.println("SQLState: " + ex.getSQLState());
                 System.out.println("VendorError: " + ex.getErrorCode());
             }
-            City[] cities = new City[length];
+            Language[] languages = new Language[length];
             try {
                 stmt = con.createStatement();
                 rs = stmt.executeQuery("SELECT * FROM city");
                 int counter = 0;
                 while(rs.next()) {
-                    City temp = new City(rs.getString("Name"), rs.getInt("Population"), rs.getString("CountryCode"), rs.getInt("ID"), rs.getString("District"));
-                    cities[counter] = temp;
+                    Language temp = new Language(rs.getString("Code"), rs.getString("Language"), rs.getBoolean("IsOfficial"), rs.getFloat("Percentage"));
+                    languages[counter] = temp;
                     counter++;
                 }
             }
