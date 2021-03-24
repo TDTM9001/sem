@@ -1,10 +1,12 @@
-/*package com.napier.sem;
+package com.napier.sem;
 
+import locations.Country;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,9 +24,8 @@ public class AppIntegrationTest
     @Test
     void testGetEmployee()
     {
-        Employee emp = app.getEmployee(255530);
-        assertEquals(emp.emp_no, 255530);
-        assertEquals(emp.first_name, "Ronghao");
-        assertEquals(emp.last_name, "Garigliano");
+        List countryList[] = (List[]) app.GetCountryData();
+        Country country = (Country) countryList[0];
+        assertEquals(country.getName(), "Aruba");
     }
-}*/
+}
