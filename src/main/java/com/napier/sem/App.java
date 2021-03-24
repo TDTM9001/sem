@@ -34,7 +34,7 @@ public class App
             try
             {
                 // Wait a bit for db to start
-                Thread.sleep(30000);
+                Thread.sleep(3000);
                 // Connect to database
                 con = DriverManager.getConnection("jdbc:mysql://db:3306/world?allowPublicKeyRetrieval=true&useSSL=false", "root", "example");
                 System.out.println("Successfully connected");
@@ -73,6 +73,7 @@ public class App
 
     public Country[] GetCountryData()
     {
+        connect();
         if (con != null)
         {
             Statement stmt;
@@ -81,8 +82,9 @@ public class App
             try {
                 stmt = con.createStatement();
                 rs = stmt.executeQuery("SELECT COUNT(*) FROM country");
-                rs.next();
-                length = rs.getInt(1);
+                while(rs.next()){
+                    length = rs.getInt(1);
+                }
             }
             catch (SQLException ex) {
                 // handle any errors
@@ -91,6 +93,8 @@ public class App
                 System.out.println("VendorError: " + ex.getErrorCode());
             }
             Country[] countries = new Country[length];
+            disconnect();
+            connect();
             try {
                 stmt = con.createStatement();
                 rs = stmt.executeQuery("SELECT * FROM country");
@@ -107,7 +111,8 @@ public class App
                 System.out.println("SQLState: " + ex.getSQLState());
                 System.out.println("VendorError: " + ex.getErrorCode());
             }
-            return null;
+            disconnect();
+            return countries;
         }
         else {
             return null;
@@ -116,6 +121,7 @@ public class App
 
     public City[] GetCityData()
     {
+        connect();
         if (con != null)
         {
             Statement stmt;
@@ -124,8 +130,9 @@ public class App
             try {
                 stmt = con.createStatement();
                 rs = stmt.executeQuery("SELECT COUNT(*) FROM city");
-                rs.first();
-                length = rs.getInt(1);
+                while(rs.next()){
+                    length = rs.getInt(1);
+                }
             }
             catch (SQLException ex) {
                 // handle any errors
@@ -133,8 +140,9 @@ public class App
                 System.out.println("SQLState: " + ex.getSQLState());
                 System.out.println("VendorError: " + ex.getErrorCode());
             }
-            System.out.println(length);
             City[] cities = new City[length];
+            disconnect();
+            connect();
             try {
                 stmt = con.createStatement();
                 rs = stmt.executeQuery("SELECT * FROM city");
@@ -151,7 +159,8 @@ public class App
                 System.out.println("SQLState: " + ex.getSQLState());
                 System.out.println("VendorError: " + ex.getErrorCode());
             }
-            return null;
+            disconnect();
+            return cities;
         }
         else {
             return null;
@@ -160,6 +169,7 @@ public class App
 
     public Language[] GetLanguageData()
     {
+        connect();
         if (con != null)
         {
             Statement stmt;
@@ -177,13 +187,15 @@ public class App
                 System.out.println("SQLState: " + ex.getSQLState());
                 System.out.println("VendorError: " + ex.getErrorCode());
             }
+            disconnect();
+            connect();
             Language[] languages = new Language[length];
             try {
                 stmt = con.createStatement();
                 rs = stmt.executeQuery("SELECT * FROM city");
                 int counter = 0;
                 while(rs.next()) {
-                    Language temp = new Language(rs.getString("Code"), rs.getString("Language"), rs.getBoolean("IsOfficial"), rs.getFloat("Percentage"));
+                    Language temp = new Language(rs.getString("CountryCode"), rs.getString("Language"), rs.getBoolean("IsOfficial"), rs.getFloat("Percentage"));
                     languages[counter] = temp;
                     counter++;
                 }
@@ -194,7 +206,8 @@ public class App
                 System.out.println("SQLState: " + ex.getSQLState());
                 System.out.println("VendorError: " + ex.getErrorCode());
             }
-            return null;
+            disconnect();
+            return languages;
         }
         else {
             return null;
@@ -208,13 +221,9 @@ public class App
         // Create new Application
         App a = new App();
 
-        // Connect to database
-        a.connect();
 
         City[] cities = a.GetCityData();
         Country[] countries = a.GetCountryData();
         Language[] languages = a.GetLanguageData();
-        // Disconnect from database
-        a.disconnect();
     }
 }
