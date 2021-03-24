@@ -1,5 +1,7 @@
 package com.napier.sem;
 
+import locations.*;
+
 import java.sql.*;
 
 public class App
@@ -69,7 +71,7 @@ public class App
         }
     }
 
-    public void test()
+    public Country[] GetCountryData()
     {
         if (con != null)
         {
@@ -93,6 +95,55 @@ public class App
         }
     }
 
+    public City[] GetCityData()
+    {
+        if (con != null)
+        {
+            Statement stmt = null;
+            ResultSet rs = null;
+            try {
+                stmt = con.createStatement();
+                rs = stmt.executeQuery("SELECT * FROM city");
+                while(rs.next())
+                {
+
+                }
+            }
+            catch (SQLException ex){
+                // handle any errors
+                System.out.println("SQLException: " + ex.getMessage());
+                System.out.println("SQLState: " + ex.getSQLState());
+                System.out.println("VendorError: " + ex.getErrorCode());
+            }
+        }
+    }
+
+    public Language[] GetLanguageData()
+    {
+        if (con != null)
+        {
+            Statement stmt = null;
+            ResultSet rs = null;
+            try {
+                stmt = con.createStatement();
+                rs = stmt.executeQuery("SELECT ID,Name,CountryCode FROM city");
+                while(rs.next())
+                {
+                    String str = "ID: " + String.valueOf(rs.getInt(1)) + ", Name: " + rs.getString(2);
+                    System.out.println(str);
+                }
+            }
+            catch (SQLException ex){
+                // handle any errors
+                System.out.println("SQLException: " + ex.getMessage());
+                System.out.println("SQLState: " + ex.getSQLState());
+                System.out.println("VendorError: " + ex.getErrorCode());
+            }
+        }
+    }
+
+
+
     public static void main(String[] args)
     {
         // Create new Application
@@ -101,7 +152,9 @@ public class App
         // Connect to database
         a.connect();
 
-        a.test();
+        City[] cities = a.GetCityData();
+        Country[] countries = a.GetCountryData();
+        Language[] languages = a.GetLanguageData();
         // Disconnect from database
         a.disconnect();
     }
