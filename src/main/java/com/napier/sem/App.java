@@ -1,5 +1,7 @@
 package com.napier.sem;
 
+import locations.*;
+
 import java.sql.*;
 
 public class App
@@ -34,13 +36,13 @@ public class App
                 // Wait a bit for db to start
                 Thread.sleep(30000);
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://db:3306/employees?allowPublicKeyRetrieval=true&useSSL=false", "root", "example");
+                con = DriverManager.getConnection("jdbc:mysql://db:3306/world?allowPublicKeyRetrieval=true&useSSL=false", "root", "example");
                 System.out.println("Successfully connected");
                 break;
             }
             catch (SQLException sqle)
             {
-                System.out.println("Failed to connect to database attempt " + Integer.toString(i));
+                System.out.println("Failed to connect to database attempt " + i);
                 System.out.println(sqle.getMessage());
             }
             catch (InterruptedException ie)
@@ -68,15 +70,160 @@ public class App
             }
         }
     }
+
+    public Country[] GetCountryData()
+    {
+        connect();
+        if (con != null)
+        {
+            Statement stmt;
+            ResultSet rs;
+            int length = 0;
+            try {
+                stmt = con.createStatement();
+                rs = stmt.executeQuery("SELECT COUNT(*) FROM country");
+                while(rs.next()){
+                    length = rs.getInt(1);
+                }
+            }
+            catch (SQLException ex) {
+                // handle any errors
+                System.out.println("SQLException: " + ex.getMessage());
+                System.out.println("SQLState: " + ex.getSQLState());
+                System.out.println("VendorError: " + ex.getErrorCode());
+            }
+            Country[] countries = new Country[length];
+            disconnect();
+            connect();
+            try {
+                stmt = con.createStatement();
+                rs = stmt.executeQuery("SELECT * FROM country");
+                int counter = 0;
+                while(rs.next()) {
+                    Country temp = new Country(rs.getString("Name"), rs.getInt("Population"), rs.getString("Code"), rs.getString("Continent"), rs.getString("Region"), rs.getInt("Capital"));
+                    countries[counter] = temp;
+                    counter++;
+                }
+            }
+            catch (SQLException ex){
+                // handle any errors
+                System.out.println("SQLException: " + ex.getMessage());
+                System.out.println("SQLState: " + ex.getSQLState());
+                System.out.println("VendorError: " + ex.getErrorCode());
+            }
+            disconnect();
+            return countries;
+        }
+        else {
+            return null;
+        }
+    }
+
+    public City[] GetCityData()
+    {
+        connect();
+        if (con != null)
+        {
+            Statement stmt;
+            ResultSet rs;
+            int length = 0;
+            try {
+                stmt = con.createStatement();
+                rs = stmt.executeQuery("SELECT COUNT(*) FROM city");
+                while(rs.next()){
+                    length = rs.getInt(1);
+                }
+            }
+            catch (SQLException ex) {
+                // handle any errors
+                System.out.println("SQLException: " + ex.getMessage());
+                System.out.println("SQLState: " + ex.getSQLState());
+                System.out.println("VendorError: " + ex.getErrorCode());
+            }
+            City[] cities = new City[length];
+            disconnect();
+            connect();
+            try {
+                stmt = con.createStatement();
+                rs = stmt.executeQuery("SELECT * FROM city");
+                int counter = 0;
+                while(rs.next()) {
+                    City temp = new City(rs.getString("Name"), rs.getInt("Population"), rs.getString("CountryCode"), rs.getInt("ID"), rs.getString("District"));
+                    cities[counter] = temp;
+                    counter++;
+                }
+            }
+            catch (SQLException ex){
+                // handle any errors
+                System.out.println("SQLException: " + ex.getMessage());
+                System.out.println("SQLState: " + ex.getSQLState());
+                System.out.println("VendorError: " + ex.getErrorCode());
+            }
+            disconnect();
+            return cities;
+        }
+        else {
+            return null;
+        }
+    }
+
+    public Language[] GetLanguageData()
+    {
+        connect();
+        if (con != null)
+        {
+            Statement stmt;
+            ResultSet rs;
+            int length = 0;
+            try {
+                stmt = con.createStatement();
+                rs = stmt.executeQuery("SELECT COUNT(*) FROM countrylanguage");
+                rs.next();
+                length = rs.getInt(1);
+            }
+            catch (SQLException ex) {
+                // handle any errors
+                System.out.println("SQLException: " + ex.getMessage());
+                System.out.println("SQLState: " + ex.getSQLState());
+                System.out.println("VendorError: " + ex.getErrorCode());
+            }
+            disconnect();
+            connect();
+            Language[] languages = new Language[length];
+            try {
+                stmt = con.createStatement();
+                rs = stmt.executeQuery("SELECT * FROM city");
+                int counter = 0;
+                while(rs.next()) {
+                    Language temp = new Language(rs.getString("CountryCode"), rs.getString("Language"), rs.getBoolean("IsOfficial"), rs.getFloat("Percentage"));
+                    languages[counter] = temp;
+                    counter++;
+                }
+            }
+            catch (SQLException ex){
+                // handle any errors
+                System.out.println("SQLException: " + ex.getMessage());
+                System.out.println("SQLState: " + ex.getSQLState());
+                System.out.println("VendorError: " + ex.getErrorCode());
+            }
+            disconnect();
+            return languages;
+        }
+        else {
+            return null;
+        }
+    }
+
+
+
     public static void main(String[] args)
     {
         // Create new Application
         App a = new App();
 
-        // Connect to database
-        a.connect();
 
-        // Disconnect from database
-        a.disconnect();
+        City[] cities = a.GetCityData();
+        Country[] countries = a.GetCountryData();
+        Language[] languages = a.GetLanguageData();
     }
 }
