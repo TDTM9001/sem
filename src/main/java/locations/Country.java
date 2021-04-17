@@ -29,6 +29,13 @@ public class Country{
     public int getPopulation(){ return this.population; }
     public String getCode(){ return this.code; }
 
+    /**
+     * Get sum pop of all cities, and total pop in country
+     * @param c
+     * @param cities
+     * @param countries
+     * @return [city pop, country pop]
+     */
     public static long[] popByCountry(Country c, City[] cities, Country[] countries){
         City[] allInCountry = City.getAllByCountry(0, cities, c.getName(), countries);
         long sumCities = 0;
@@ -38,9 +45,12 @@ public class Country{
         return new long[]{sumCities, c.getPopulation()-sumCities};
     }
 
-    /*
-    Get sum of all cities, countries in continent
-    return [sum cities, sum countries - sum cities]
+    /**
+     * Get sum pop of all cities, and total pop in continent
+     * @param continent
+     * @param countries
+     * @param cities
+     * @return [city pop, continent pop]
      */
     public static long[] popByContinent(String continent, Country[] countries, City[] cities){
         City[] citiesInContinent = City.getAllByContinent(0, cities, continent, countries);
@@ -60,9 +70,12 @@ public class Country{
         return new long[]{sumCities, (sumCountries-sumCities)};
     }
 
-    /*
-    Get sum of all cities, countries in region
-    return [sum cities, sum countries - sum cities]
+    /**
+     * Get sum of all cities, countries in region
+     * @param region
+     * @param countries
+     * @param cities
+     * @return [city pop, region pop]
      */
     public static long[] popByRegion(String region, Country[] countries, City[] cities){
         City[] citiesInRegion = City.getAllByRegion(0, cities, region, countries);
@@ -82,8 +95,12 @@ public class Country{
         return new long[]{sumCities, (sumCountries-sumCities)};
     }
 
-    /*
-    Validates user input and adds only countries with continent to return
+    /**
+     * get all countries in a continent
+     * @param howMany
+     * @param continent
+     * @param countries
+     * @return countries[]
      */
     public static Country[] getAllByContinent(int howMany, String continent, Country[] countries){
 
@@ -117,10 +134,13 @@ public class Country{
             return topNCountries(howMany, return_countries);
         }
     }
-    /*
-    Returns every country in a region
-    Loops through every country and if region = user input then add to arraylist
-    Convert back to array and return
+
+    /**
+     * get all countries in a region
+     * @param howMany
+     * @param region
+     * @param countries
+     * @return countries[]
      */
     public static Country[] getAllByRegion(int howMany, String region, Country[] countries) {
         ArrayList<Country> found_countries = new ArrayList<Country>();
