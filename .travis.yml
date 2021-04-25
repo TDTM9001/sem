@@ -32,10 +32,7 @@ jobs:
       script: echo "Deploy"
 
 stages:
-  - unit tests
-  - integration tests
-  - name: deploy
-    if: branch = master
+  - deploy
 
 after_success:
   - docker-compose up --abort-on-container-exit
