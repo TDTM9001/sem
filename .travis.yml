@@ -10,8 +10,7 @@ services:
   - docker
 
 install:
-  - docker build -t database db/.
-  - docker run --rm -d -e MYSQL_ROOT_PASSWORD=example -p 33060:3306 database
+  - docker build db/. --default-authentication-plugin=mysql_native_password
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
 before_script:
