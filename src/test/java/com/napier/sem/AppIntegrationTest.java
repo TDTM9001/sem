@@ -23,7 +23,8 @@ public class AppIntegrationTest
     @Test
     void testGetEmployee()
     {
-        List countryList[] = (List[]) app.GetCountryData();
+        String server_name = "mysql://db:3306/world?allowPublicKeyRetrieval=true&useSSL=false";
+        List countryList[] = (List[]) app.GetCountryData(server_name);
         Country country = (Country) countryList[0];
         assertEquals(country.getName(), "Aruba");
     }

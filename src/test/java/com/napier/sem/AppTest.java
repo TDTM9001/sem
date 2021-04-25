@@ -21,11 +21,4 @@ public class AppTest
         app = new App();
     }
 
-    @Test
-    void checkCity()
-    {
-        List cityList[] = (List[]) app.GetCityData();
-        City city = (City) cityList[0];
-        assertEquals(city.getName(), "Kabul");
-    }
 }

@@ -14,7 +14,7 @@ public class App
     /**
      * Connect to the MySQL database.
      */
-    public void connect()
+    public void connect(String server_name)
     {
         try
         {
@@ -34,9 +34,9 @@ public class App
             try
             {
                 // Wait a bit for db to start
-                Thread.sleep(30000);
+                Thread.sleep(3000);
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://db:3306/world?allowPublicKeyRetrieval=true&useSSL=false", "root", "example");
+                con = DriverManager.getConnection("jdbc:" + server_name, "root", "example");
                 System.out.println("Successfully connected");
                 break;
             }
@@ -71,9 +71,9 @@ public class App
         }
     }
 
-    public Country[] GetCountryData()
+    public Country[] GetCountryData(String server_name)
     {
-        connect();
+        connect(server_name);
         if (con != null)
         {
             Statement stmt;
@@ -94,7 +94,7 @@ public class App
             }
             Country[] countries = new Country[length];
             disconnect();
-            connect();
+            connect(server_name);
             try {
                 stmt = con.createStatement();
                 rs = stmt.executeQuery("SELECT * FROM country");
@@ -119,9 +119,9 @@ public class App
         }
     }
 
-    public City[] GetCityData()
+    public City[] GetCityData(String server_name)
     {
-        connect();
+        connect(server_name);
         if (con != null)
         {
             Statement stmt;
@@ -142,7 +142,7 @@ public class App
             }
             City[] cities = new City[length];
             disconnect();
-            connect();
+            connect(server_name);
             try {
                 stmt = con.createStatement();
                 rs = stmt.executeQuery("SELECT * FROM city");
@@ -167,9 +167,9 @@ public class App
         }
     }
 
-    public Language[] GetLanguageData()
+    public Language[] GetLanguageData(String server_name)
     {
-        connect();
+        connect(server_name);
         if (con != null)
         {
             Statement stmt;
@@ -188,11 +188,11 @@ public class App
                 System.out.println("VendorError: " + ex.getErrorCode());
             }
             disconnect();
-            connect();
+            connect(server_name);
             Language[] languages = new Language[length];
             try {
                 stmt = con.createStatement();
-                rs = stmt.executeQuery("SELECT * FROM city");
+                rs = stmt.executeQuery("SELECT * FROM countrylanguage");
                 int counter = 0;
                 while(rs.next()) {
                     Language temp = new Language(rs.getString("CountryCode"), rs.getString("Language"), rs.getBoolean("IsOfficial"), rs.getFloat("Percentage"));
@@ -220,10 +220,10 @@ public class App
     {
         // Create new Application
         App a = new App();
+        String server_name = "mysql://db:3306/world?allowPublicKeyRetrieval=true&useSSL=false";
 
-
-        City[] cities = a.GetCityData();
-        Country[] countries = a.GetCountryData();
-        Language[] languages = a.GetLanguageData();
+        City[] cities = a.GetCityData(server_name);
+        Country[] countries = a.GetCountryData(server_name);
+        Language[] languages = a.GetLanguageData(server_name);
     }
 }
