@@ -10,8 +10,6 @@ services:
   - docker
 
 install:
-  - docker build -t database db/.
-  - docker run --rm -d -e MYSQL_ROOT_PASSWORD=example -p 33060:3306 database
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
 before_install:
@@ -25,11 +23,11 @@ jobs:
       script: mvn test -Dtest=com.napier.sem.AppTest -DfailIfNoTests=false
     - stage: integration tests
       jdk: oraclejdk11
+      install: skip
       script: docker-compose -f docker-compose.test.yml up --abort-on-container-exit
     - stage: deploy
       jdk: oraclejdk11
-      install: skip
-      script: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+      script: docker-compose up --abort-on-container-exit
 
 stages:
   - unit tests
@@ -38,4 +36,4 @@ stages:
     if: branch = master
 
 after_success:
-  - docker-compose up --abort-on-container-exit
+  - echo "It Works!"
