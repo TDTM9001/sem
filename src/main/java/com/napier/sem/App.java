@@ -27,7 +27,7 @@ public class App
             System.exit(-1);
         }
 
-        int retries = 10;
+        int retries = 50;
         for (int i = 0; i < retries; ++i)
         {
             System.out.println("Connecting to database...");
@@ -195,7 +195,7 @@ public class App
                 rs = stmt.executeQuery("SELECT * FROM countrylanguage");
                 int counter = 0;
                 while(rs.next()) {
-                    Language temp = new Language(rs.getString("CountryCode"), rs.getString("Language"), rs.getBoolean("IsOfficial"), rs.getFloat("Percentage"));
+                    Language temp = new Language(rs.getString("CountryCode"), rs.getString("Language"), rs.getString("IsOfficial").equals("T"), rs.getFloat("Percentage"));
                     languages[counter] = temp;
                     counter++;
                 }
