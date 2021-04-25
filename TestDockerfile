@@ -1,4 +1,4 @@
-FROM openjdk:latest
+FROM maven:3.8.1-openjdk-11
 COPY ./ /tmp
 WORKDIR /tmp
 CMD mvn test -Dtest=com.napier.sem.AppIntegrationTest
