@@ -1,0 +1,4 @@
+FROM openjdk:latest
+COPY ./ /tmp
+WORKDIR /tmp
+CMD mvn test -Dtest=com.napier.sem.AppIntegrationTest
