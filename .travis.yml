@@ -14,7 +14,7 @@ install:
   - docker run --rm -d -e MYSQL_ROOT_PASSWORD=example -p 33060:3306 database
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
-before_script:
+before_install:
   - mvn clean
 
 jobs:
@@ -32,7 +32,10 @@ jobs:
       script: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
 stages:
-  - deploy
+  - unit tests
+  - integration tests
+  - name: deploy
+    if: branch = master
 
 after_success:
   - docker-compose up --abort-on-container-exit
