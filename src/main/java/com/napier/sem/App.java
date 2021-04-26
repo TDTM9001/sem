@@ -283,27 +283,27 @@ public class App
                         System.out.println("6. South America");
                         switch(switchContinentOne) {
                             case 1:
-                                inputString = "Africa";
+                                inputString = "africa";
                                 break;
 
                             case 2:
-                                inputString = "Asia";
+                                inputString = "asia";
                                 break;
 
                             case 3:
-                                inputString = "Europe";
+                                inputString = "europe";
                                 break;
 
                             case 4:
-                                inputString = "North America";
+                                inputString = "north america";
                                 break;
 
                             case 5:
-                                inputString = "Oceania";
+                                inputString = "oceania";
                                 break;
 
                             case 6:
-                                inputString = "South America";
+                                inputString = "south america";
                                 break;
 
                             default:
@@ -359,7 +359,35 @@ public class App
                         System.out.println("Error: Invalid Input");
                 }
 
+                if(switchCategoryOne == 1) {
+                    if(switchSearchOne == 1) {
+                        return countries;
+                    } else if(switchSearchOne == 2) {
 
+                    } else if(switchSearchOne == 3) {
+
+                    }
+                } else if(switchCategoryOne == 2) {
+                    if(switchSearchOne == 1) {
+
+                    } else if(switchSearchOne == 2) {
+
+                    } else if(switchSearchOne == 3) {
+
+                    } else if(switchSearchOne == 4) {
+
+                    } else if(switchSearchOne == 5) {
+
+                    }
+                } else if(switchCategoryOne == 3) {
+                    if(switchSearchOne == 1) {
+
+                    } else if(switchSearchOne == 2) {
+
+                    } else if(switchSearchOne == 3) {
+
+                    }
+                }
                 break;
 
             case 2:  //Population of a given Category
@@ -386,27 +414,27 @@ public class App
                         System.out.println("6. South America");
                         switch(switchContinentTwo) {
                             case 1:
-                                inputString = "Africa";
+                                inputString = "africa";
                                 break;
 
                             case 2:
-                                inputString = "Asia";
+                                inputString = "asia";
                                 break;
 
                             case 3:
-                                inputString = "Europe";
+                                inputString = "europe";
                                 break;
 
                             case 4:
-                                inputString = "North America";
+                                inputString = "north america";
                                 break;
 
                             case 5:
-                                inputString = "Oceania";
+                                inputString = "oceania";
                                 break;
 
                             case 6:
-                                inputString = "South America";
+                                inputString = "south america";
                                 break;
 
                             default:
