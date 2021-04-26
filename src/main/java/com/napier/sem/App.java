@@ -3,6 +3,7 @@ package com.napier.sem;
 import locations.*;
 
 import java.sql.*;
+import java.util.Scanner;
 
 public class App
 {
@@ -225,5 +226,224 @@ public class App
         City[] cities = a.GetCityData(server_name);
         Country[] countries = a.GetCountryData(server_name);
         Language[] languages = a.GetLanguageData(server_name);
+
+        System.out.println("Welcome to the Population Research App");  //Welcome message
+        System.out.println("Please select a menu option:");
+        System.out.println("1. Show Population from Largest to Smallest");
+        System.out.println("2. Population of a given Category");
+        System.out.println("3. Language Report");
+
+        int switchMain = 0;
+        String inputString;
+        switch(switchMain) {
+            case 1:  //Show Population from Largest to Smallest
+                int switchCategoryOne, switchSearchOne, switchLimit, switchContinentOne;
+                int inputLimit = 0;
+                System.out.println("Please select Category to Sort by:");
+                System.out.println("1. Sort Countries");
+                System.out.println("2. Sort Cities");
+                System.out.println("3. Sort Capital Cities");
+
+                switch(switchCategoryOne) {
+                    case 1:
+                        break;
+
+                    case 2:
+                        break;
+
+                    case 3:
+                        break;
+
+                    default:
+                        System.out.println("Error: Invalid Input");
+                }
+
+                System.out.println("Please select where to search:");
+                System.out.println("1. In the World");
+                System.out.println("2. In a Continent");
+                System.out.println("3. In a Region");
+                if(switchCategory == 2) {
+                    System.out.println("4. In a Country");  //Options are only shown if Sorting Cities
+                    System.out.println("5. In a District");
+                }
+                switch(switchSearchOne) {
+                    case 1:
+                        break;
+
+                    case 2:
+                        System.out.println("Please select which Continent:");
+                        System.out.println("1. Africa");
+                        System.out.println("2. Asia");
+                        System.out.println("3. Europe");
+                        System.out.println("4. North America");
+                        System.out.println("5. Oceania");
+                        System.out.println("6. South America");
+                        switch(switchContinentOne) {
+                            case 1:
+                                inputString = "Africa";
+                                break;
+
+                            case 2:
+                                inputString = "Asia";
+                                break;
+
+                            case 3:
+                                inputString = "Europe";
+                                break;
+
+                            case 4:
+                                inputString = "North America";
+                                break;
+
+                            case 5:
+                                inputString = "Oceania";
+                                break;
+
+                            case 6:
+                                inputString = "South America";
+                                break;
+
+                            default:
+                                System.out.println("Error: Invalid Input");
+                        }
+                        break;
+
+                    case 3:
+                        System.out.println("Please enter which Region:");
+                        Scanner scan = new Scanner(System.in);
+                        inputString = scan.next();
+                        break;
+
+                    case 4:
+                        if(switchCategoryOne != 2) {
+                            System.out.println("Error: Invalid Input");
+                        } else {
+                            System.out.println("Please enter which Country:");
+                            Scanner scan = new Scanner(System.in);
+                            inputString = scan.next();
+                        }
+                        break;
+
+                    case 5:
+                        if(switchCategoryOne != 2) {
+                            System.out.println("Error: Invalid Input");
+                        } else {
+                            System.out.println("Please enter which District:");
+                            Scanner scan = new Scanner(System.in);
+                            inputString = scan.next();
+                        }
+                        break;
+
+                    default:
+                        System.out.println("Error: Invalid Input");
+                }
+
+                System.out.println("Please select Category to Sort by:");
+                System.out.println("1. Show all Results");
+                System.out.println("2. Limit to the top 'N' results");
+
+                switch(switchLimit) {
+                    case 1:
+                        break;
+
+                    case 2:
+                        System.out.println("Please enter amount to Limit by:");
+                        Scanner scan = new Scanner(System.in);
+                        inputLimit = scan.nextInt();
+                        break;
+
+                    default:
+                        System.out.println("Error: Invalid Input");
+                }
+
+
+                break;
+
+            case 2:  //Population of a given Category
+                int switchCategoryTwo, switchContinentTwo;
+                System.out.println("Please select which Category:");
+                System.out.println("1. Show Population of the World");
+                System.out.println("2. Show Population of a Continent");
+                System.out.println("3. Show Population of a Region");
+                System.out.println("4. Show Population of a Country");
+                System.out.println("5. Show Population of a District");
+                System.out.println("6. Show Population of a City");
+                switch(switchCategoryTwo) {
+                    case 1:
+                        break;
+
+                    case 2:
+                        System.out.println("Please select which Continent:");
+                        System.out.println("1. Africa");
+                        System.out.println("2. Asia");
+                        System.out.println("3. Europe");
+                        System.out.println("4. North America");
+                        System.out.println("5. Oceania");
+                        System.out.println("6. South America");
+                        switch(switchContinentTwo) {
+                            case 1:
+                                inputString = "Africa";
+                                break;
+
+                            case 2:
+                                inputString = "Asia";
+                                break;
+
+                            case 3:
+                                inputString = "Europe";
+                                break;
+
+                            case 4:
+                                inputString = "North America";
+                                break;
+
+                            case 5:
+                                inputString = "Oceania";
+                                break;
+
+                            case 6:
+                                inputString = "South America";
+                                break;
+
+                            default:
+                                System.out.println("Error: Invalid Input");
+                        }
+                        break;
+
+                    case 3:
+                        System.out.println("Please enter which Region:");
+                        Scanner scan = new Scanner(System.in);
+                        inputString = scan.next();
+                        break;
+
+                    case 4:
+                        System.out.println("Please enter which Country:");
+                        Scanner scan = new Scanner(System.in);
+                        inputString = scan.next();
+                        break;
+
+                    case 5:
+                        System.out.println("Please enter which District:");
+                        Scanner scan = new Scanner(System.in);
+                        inputString = scan.next();
+                        break;
+
+                    case 6:
+                        System.out.println("Please enter which City:");
+                        Scanner scan = new Scanner(System.in);
+                        inputString = scan.next();
+                        break;
+
+                    default:
+                        System.out.println("Error: Invalid Input");
+                }
+                break;
+
+            case 3:  //Language Report
+                break;
+
+            default:
+                System.out.println("Error: Invalid input");
+        }
     }
 }
