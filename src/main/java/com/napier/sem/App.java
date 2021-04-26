@@ -237,7 +237,10 @@ public class App
         String inputString;
         switch(switchMain) {
             case 1:  //Show Population from Largest to Smallest
-                int switchCategoryOne, switchSearchOne, switchLimit, switchContinentOne;
+                int switchCategoryOne = 0;
+                int switchSearchOne = 0;
+                int switchLimit = 0;
+                int switchContinentOne = 0;
                 int inputLimit = 0;
                 System.out.println("Please select Category to Sort by:");
                 System.out.println("1. Sort Countries");
@@ -360,7 +363,8 @@ public class App
                 break;
 
             case 2:  //Population of a given Category
-                int switchCategoryTwo, switchContinentTwo;
+                int switchCategoryTwo = 0;
+                int switchContinentTwo = 0;
                 System.out.println("Please select which Category:");
                 System.out.println("1. Show Population of the World");
                 System.out.println("2. Show Population of a Continent");
