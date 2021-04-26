@@ -4,6 +4,7 @@ import locations.*;
 
 import java.sql.*;
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class App
 {
