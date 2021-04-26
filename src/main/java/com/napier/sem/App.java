@@ -262,7 +262,7 @@ public class App
                 System.out.println("1. In the World");
                 System.out.println("2. In a Continent");
                 System.out.println("3. In a Region");
-                if(switchCategory == 2) {
+                if(switchCategoryOne == 2) {
                     System.out.println("4. In a Country");  //Options are only shown if Sorting Cities
                     System.out.println("5. In a District");
                 }
@@ -319,8 +319,8 @@ public class App
                             System.out.println("Error: Invalid Input");
                         } else {
                             System.out.println("Please enter which Country:");
-                            Scanner scan = new Scanner(System.in);
-                            inputString = scan.next();
+                            Scanner scan2 = new Scanner(System.in);
+                            inputString = scan2.next();
                         }
                         break;
 
@@ -329,8 +329,8 @@ public class App
                             System.out.println("Error: Invalid Input");
                         } else {
                             System.out.println("Please enter which District:");
-                            Scanner scan = new Scanner(System.in);
-                            inputString = scan.next();
+                            Scanner scan3 = new Scanner(System.in);
+                            inputString = scan3.next();
                         }
                         break;
 
@@ -348,8 +348,8 @@ public class App
 
                     case 2:
                         System.out.println("Please enter amount to Limit by:");
-                        Scanner scan = new Scanner(System.in);
-                        inputLimit = scan.nextInt();
+                        Scanner scan4 = new Scanner(System.in);
+                        inputLimit = scan4.nextInt();
                         break;
 
                     default:
@@ -412,26 +412,26 @@ public class App
 
                     case 3:
                         System.out.println("Please enter which Region:");
-                        Scanner scan = new Scanner(System.in);
-                        inputString = scan.next();
+                        Scanner scan5 = new Scanner(System.in);
+                        inputString = scan5.next();
                         break;
 
                     case 4:
                         System.out.println("Please enter which Country:");
-                        Scanner scan = new Scanner(System.in);
-                        inputString = scan.next();
+                        Scanner scan6 = new Scanner(System.in);
+                        inputString = scan6.next();
                         break;
 
                     case 5:
                         System.out.println("Please enter which District:");
-                        Scanner scan = new Scanner(System.in);
-                        inputString = scan.next();
+                        Scanner scan7 = new Scanner(System.in);
+                        inputString = scan7.next();
                         break;
 
                     case 6:
                         System.out.println("Please enter which City:");
-                        Scanner scan = new Scanner(System.in);
-                        inputString = scan.next();
+                        Scanner scan8 = new Scanner(System.in);
+                        inputString = scan8.next();
                         break;
 
                     default:
