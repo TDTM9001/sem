@@ -361,7 +361,7 @@ public class App
 
                 if(switchCategoryOne == 1) {
                     if(switchSearchOne == 1) {
-                        return countries;
+                        System.out.println(Arrays.toString(countries));
                     } else if(switchSearchOne == 2) {
 
                     } else if(switchSearchOne == 3) {
