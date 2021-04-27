@@ -216,18 +216,7 @@ public class App
         }
     }
 
-
-
-    public static void main(String[] args)
-    {
-        // Create new Application
-        App a = new App();
-        String server_name = "mysql://db:3306/world?allowPublicKeyRetrieval=true&useSSL=false";
-
-        City[] cities = a.GetCityData(server_name);
-        Country[] countries = a.GetCountryData(server_name);
-        Language[] languages = a.GetLanguageData(server_name);
-
+    public static void menu(City[] cities, Country[] countries, Language[] languages){
         System.out.println("Welcome to the Population Research App");  //Welcome message
         System.out.println("Please select a menu option:");
         System.out.println("1. Show Population from Largest to Smallest");
@@ -235,7 +224,9 @@ public class App
         System.out.println("3. Language Report");
 
         int switchMain = 0;
-        String inputString;
+        Scanner scan = new Scanner(System.in);
+        String inputString = scan.next();
+        switchMain =  Integer.parseInt(inputString);
         switch(switchMain) {
             case 1:  //Show Population from Largest to Smallest
                 int switchCategoryOne = 0;
@@ -314,7 +305,6 @@ public class App
 
                     case 3:
                         System.out.println("Please enter which Region:");
-                        Scanner scan = new Scanner(System.in);
                         inputString = scan.next();
                         break;
 
@@ -323,8 +313,7 @@ public class App
                             System.out.println("Error: Invalid Input");
                         } else {
                             System.out.println("Please enter which Country:");
-                            Scanner scan2 = new Scanner(System.in);
-                            inputString = scan2.next();
+                            inputString = scan.next();
                         }
                         break;
 
@@ -478,5 +467,25 @@ public class App
             default:
                 System.out.println("Error: Invalid input");
         }
+    }
+
+
+
+    public static void main(String[] args)
+    {
+        // Create new Application
+        App a = new App();
+        String server_test = "mysql://127.0.0.1:3306/world?allowPublicKeyRetrieval=true&useSSL=false";
+        String server_normal = "mysql://db:3306/world?allowPublicKeyRetrieval=true&useSSL=false";
+        String server_name = server_normal;
+
+        City[] cities = a.GetCityData(server_name);
+        System.out.println("Cities Added");
+        Country[] countries = a.GetCountryData(server_name);
+        System.out.println("Countries Added");
+        Language[] languages = a.GetLanguageData(server_name);
+        System.out.println("Languages Added");
+
+        menu(cities,countries,languages);
     }
 }
