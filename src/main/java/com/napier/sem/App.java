@@ -224,9 +224,10 @@ public class App
         System.out.println("3. Language Report");
 
         int switchMain = 0;
+        int i;
         Scanner scan = new Scanner(System.in);
-        String inputString = scan.next();
-        switchMain =  Integer.parseInt(inputString);
+        String inputString;
+        switchMain = scan.nextInt();
         switch(switchMain) {
             case 1:  //Show Population from Largest to Smallest
                 int switchCategoryOne = 0;
@@ -239,6 +240,7 @@ public class App
                 System.out.println("2. Sort Cities");
                 System.out.println("3. Sort Capital Cities");
 
+                switchCategoryOne = scan.nextInt();
                 switch(switchCategoryOne) {
                     case 1:
                         break;
@@ -261,6 +263,8 @@ public class App
                     System.out.println("4. In a Country");  //Options are only shown if Sorting Cities
                     System.out.println("5. In a District");
                 }
+
+                switchSearchOne = scan.nextInt();
                 switch(switchSearchOne) {
                     case 1:
                         break;
@@ -322,8 +326,7 @@ public class App
                             System.out.println("Error: Invalid Input");
                         } else {
                             System.out.println("Please enter which District:");
-                            Scanner scan3 = new Scanner(System.in);
-                            inputString = scan3.next();
+                            inputString = scan.next();
                         }
                         break;
 
@@ -335,14 +338,14 @@ public class App
                 System.out.println("1. Show all Results");
                 System.out.println("2. Limit to the top 'N' results");
 
+                switchLimit = scan.nextInt();
                 switch(switchLimit) {
                     case 1:
                         break;
 
                     case 2:
                         System.out.println("Please enter amount to Limit by:");
-                        Scanner scan4 = new Scanner(System.in);
-                        inputLimit = scan4.nextInt();
+                        inputLimit = scan.nextInt();
                         break;
 
                     default:
@@ -351,7 +354,7 @@ public class App
 
                 if(switchCategoryOne == 1) {
                     if(switchSearchOne == 1) {
-                        System.out.println(Arrays.toString(countries));
+
                     } else if(switchSearchOne == 2) {
 
                     } else if(switchSearchOne == 3) {
@@ -434,26 +437,22 @@ public class App
 
                     case 3:
                         System.out.println("Please enter which Region:");
-                        Scanner scan5 = new Scanner(System.in);
-                        inputString = scan5.next();
+                        inputString = scan.next();
                         break;
 
                     case 4:
                         System.out.println("Please enter which Country:");
-                        Scanner scan6 = new Scanner(System.in);
-                        inputString = scan6.next();
+                        inputString = scan.next();
                         break;
 
                     case 5:
                         System.out.println("Please enter which District:");
-                        Scanner scan7 = new Scanner(System.in);
-                        inputString = scan7.next();
+                        inputString = scan.next();
                         break;
 
                     case 6:
                         System.out.println("Please enter which City:");
-                        Scanner scan8 = new Scanner(System.in);
-                        inputString = scan8.next();
+                        inputString = scan.next();
                         break;
 
                     default:
@@ -477,7 +476,7 @@ public class App
         App a = new App();
         String server_test = "mysql://127.0.0.1:3306/world?allowPublicKeyRetrieval=true&useSSL=false";
         String server_normal = "mysql://db:3306/world?allowPublicKeyRetrieval=true&useSSL=false";
-        String server_name = server_normal;
+        String server_name = server_test;
 
         City[] cities = a.GetCityData(server_name);
         System.out.println("Cities Added");
