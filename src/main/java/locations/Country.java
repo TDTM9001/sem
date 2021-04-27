@@ -180,7 +180,7 @@ public class Country{
         int n = countries.length;
         for(int i=0; i<n-1; i++){
             for(int j=0; j<n-i-1; j++){
-                if(countries[j].getPopulation() > countries[j+1].getPopulation()){
+                if(countries[j].getPopulation() < countries[j+1].getPopulation()){
                     Country temp_country = countries[j];
                     countries[j] = countries[j+1];
                     countries[j+1] = temp_country;

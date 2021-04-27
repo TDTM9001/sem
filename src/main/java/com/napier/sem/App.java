@@ -224,7 +224,7 @@ public class App
         System.out.println("3. Language Report");
 
         int switchMain = 0;
-        int i;
+        int i, j;
         Scanner scan = new Scanner(System.in);
         String inputString;
         switchMain = scan.nextInt();
@@ -354,7 +354,14 @@ public class App
 
                 if(switchCategoryOne == 1) {
                     if(switchSearchOne == 1) {
-
+                        Country[] countries1 = Country.sortByPopulation(countries);
+                        for(i = 0; i < countries1.length;  i++) {
+                            for(j = 0; j < cities.length;  j++) {
+                                if(countries1[i].getCapitalCode() == cities[j].getId()) {
+                                    System.out.println(countries1[i].getCode() + " " + countries1[i].getName() + " " + countries1[i].getContinent() + " " + countries1[i].getRegion() + " " + countries1[i].getPopulation() + " " + cities[j].getName());
+                                }
+                            }
+                        }
                     } else if(switchSearchOne == 2) {
 
                     } else if(switchSearchOne == 3) {

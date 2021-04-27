@@ -278,7 +278,7 @@ public class City{
         int n = cities.length;
         for(int i=0; i<n-1; i++){
             for(int j=0; j<n-i-1; j++){
-                if(cities[j].getPopulation() > cities[j+1].getPopulation()){
+                if(cities[j].getPopulation() < cities[j+1].getPopulation()){
                     City temp_city = cities[j];
                     cities[j] = cities[j+1];
                     cities[j+1] = temp_city;
