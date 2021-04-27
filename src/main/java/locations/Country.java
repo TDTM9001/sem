@@ -171,7 +171,7 @@ public class Country{
     public static Country[] topNCountries(int n, Country[] countries){
         Country[] new_countries = sortByPopulation(countries);
         int size = new_countries.length;
-        return Arrays.copyOfRange(new_countries,size-n, size);
+        return Arrays.copyOfRange(new_countries, 0, n);
     }
     /*
     Bubble sort in ascending order

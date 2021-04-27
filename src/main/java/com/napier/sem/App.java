@@ -226,7 +226,8 @@ public class App
         int switchMain = 0;
         int i, j;
         Scanner scan = new Scanner(System.in);
-        String inputString;
+        String inputString = "";
+        Boolean inputCheck = false;
         switchMain = scan.nextInt();
         switch(switchMain) {
             case 1:  //Show Population from Largest to Smallest
@@ -240,21 +241,27 @@ public class App
                 System.out.println("2. Sort Cities");
                 System.out.println("3. Sort Capital Cities");
 
-                switchCategoryOne = scan.nextInt();
-                switch(switchCategoryOne) {
-                    case 1:
-                        break;
+                while(inputCheck == false) {
+                    switchCategoryOne = scan.nextInt();
+                    switch (switchCategoryOne) {
+                        case 1:
+                            inputCheck = true;
+                            break;
 
-                    case 2:
-                        break;
+                        case 2:
+                            inputCheck = true;
+                            break;
 
-                    case 3:
-                        break;
+                        case 3:
+                            inputCheck = true;
+                            break;
 
-                    default:
-                        System.out.println("Error: Invalid Input");
+                        default:
+                            System.out.println("Error: Invalid Input");
+                    }
                 }
 
+                inputCheck = false;
                 System.out.println("Please select where to search:");
                 System.out.println("1. In the World");
                 System.out.println("2. In a Continent");
@@ -264,108 +271,154 @@ public class App
                     System.out.println("5. In a District");
                 }
 
-                switchSearchOne = scan.nextInt();
-                switch(switchSearchOne) {
-                    case 1:
-                        break;
+                while(inputCheck == false) {
+                    switchSearchOne = scan.nextInt();
+                    switch (switchSearchOne) {
+                        case 1:
+                            inputCheck = true;
+                            break;
 
-                    case 2:
-                        System.out.println("Please select which Continent:");
-                        System.out.println("1. Africa");
-                        System.out.println("2. Asia");
-                        System.out.println("3. Europe");
-                        System.out.println("4. North America");
-                        System.out.println("5. Oceania");
-                        System.out.println("6. South America");
-                        switch(switchContinentOne) {
-                            case 1:
-                                inputString = "africa";
-                                break;
+                        case 2:
+                            System.out.println("Please select which Continent:");
+                            System.out.println("1. Africa");
+                            System.out.println("2. Asia");
+                            System.out.println("3. Europe");
+                            System.out.println("4. North America");
+                            System.out.println("5. Oceania");
+                            System.out.println("6. South America");
+                            while(inputCheck == false) {
+                                switchContinentOne = scan.nextInt();
+                                switch (switchContinentOne) {
+                                    case 1:
+                                        inputString = "africa";
+                                        inputCheck = true;
+                                        break;
 
-                            case 2:
-                                inputString = "asia";
-                                break;
+                                    case 2:
+                                        inputString = "asia";
+                                        inputCheck = true;
+                                        break;
 
-                            case 3:
-                                inputString = "europe";
-                                break;
+                                    case 3:
+                                        inputString = "europe";
+                                        inputCheck = true;
+                                        break;
 
-                            case 4:
-                                inputString = "north america";
-                                break;
+                                    case 4:
+                                        inputString = "north america";
+                                        inputCheck = true;
+                                        break;
 
-                            case 5:
-                                inputString = "oceania";
-                                break;
+                                    case 5:
+                                        inputString = "oceania";
+                                        inputCheck = true;
+                                        break;
 
-                            case 6:
-                                inputString = "south america";
-                                break;
+                                    case 6:
+                                        inputString = "south america";
+                                        inputCheck = true;
+                                        break;
 
-                            default:
+                                    default:
+                                        System.out.println("Error: Invalid Input");
+                                }
+                            }
+                            break;
+
+                        case 3:
+                            System.out.println("Please enter which Region:");
+                            inputString = scan.next();
+                            inputCheck = true;
+                            break;
+
+                        case 4:
+                            if (switchCategoryOne != 2) {
                                 System.out.println("Error: Invalid Input");
-                        }
-                        break;
+                            } else {
+                                System.out.println("Please enter which Country:");
+                                inputString = scan.next();
+                                inputCheck = true;
+                            }
+                            break;
 
-                    case 3:
-                        System.out.println("Please enter which Region:");
-                        inputString = scan.next();
-                        break;
+                        case 5:
+                            if (switchCategoryOne != 2) {
+                                System.out.println("Error: Invalid Input");
+                            } else {
+                                System.out.println("Please enter which District:");
+                                inputString = scan.next();
+                                inputCheck = true;
+                            }
+                            break;
 
-                    case 4:
-                        if(switchCategoryOne != 2) {
+                        default:
                             System.out.println("Error: Invalid Input");
-                        } else {
-                            System.out.println("Please enter which Country:");
-                            inputString = scan.next();
-                        }
-                        break;
-
-                    case 5:
-                        if(switchCategoryOne != 2) {
-                            System.out.println("Error: Invalid Input");
-                        } else {
-                            System.out.println("Please enter which District:");
-                            inputString = scan.next();
-                        }
-                        break;
-
-                    default:
-                        System.out.println("Error: Invalid Input");
+                    }
                 }
 
+                inputCheck = false;
                 System.out.println("Please select Category to Sort by:");
                 System.out.println("1. Show all Results");
                 System.out.println("2. Limit to the top 'N' results");
 
-                switchLimit = scan.nextInt();
-                switch(switchLimit) {
-                    case 1:
-                        break;
+                while(inputCheck == false) {
+                    switchLimit = scan.nextInt();
+                    switch (switchLimit) {
+                        case 1:
+                            inputCheck = true;
+                            break;
 
-                    case 2:
-                        System.out.println("Please enter amount to Limit by:");
-                        inputLimit = scan.nextInt();
-                        break;
+                        case 2:
+                            System.out.println("Please enter amount to Limit by:");
+                            inputLimit = scan.nextInt();
+                            inputCheck = true;
+                            break;
 
-                    default:
-                        System.out.println("Error: Invalid Input");
+                        default:
+                            System.out.println("Error: Invalid Input");
+                    }
                 }
 
                 if(switchCategoryOne == 1) {
-                    if(switchSearchOne == 1) {
+                    if(switchSearchOne == 1) {  //Show countries in the world from largest to smallest
                         Country[] countries1 = Country.sortByPopulation(countries);
-                        for(i = 0; i < countries1.length;  i++) {
-                            for(j = 0; j < cities.length;  j++) {
-                                if(countries1[i].getCapitalCode() == cities[j].getId()) {
-                                    System.out.println(countries1[i].getCode() + " " + countries1[i].getName() + " " + countries1[i].getContinent() + " " + countries1[i].getRegion() + " " + countries1[i].getPopulation() + " " + cities[j].getName());
+                        if(switchLimit == 1) {  //Checks if to show all results or to limit by 'N'
+                            for (i = 0; i < countries1.length; i++) {
+                                for (j = 0; j < cities.length; j++) {
+                                    if (countries1[i].getCapitalCode() == cities[j].getId()) {
+                                        System.out.println(countries1[i].getCode() + " " + countries1[i].getName() + " " + countries1[i].getContinent() + " " + countries1[i].getRegion() + " " + countries1[i].getPopulation() + " " + cities[j].getName());
+                                    }
+                                }
+                            }
+                        } else {
+                            for (i = 0; i < inputLimit; i++) {
+                                for (j = 0; j < cities.length; j++) {
+                                    if (countries1[i].getCapitalCode() == cities[j].getId()) {
+                                        System.out.println(countries1[i].getCode() + " " + countries1[i].getName() + " " + countries1[i].getContinent() + " " + countries1[i].getRegion() + " " + countries1[i].getPopulation() + " " + cities[j].getName());
+                                    }
                                 }
                             }
                         }
                     } else if(switchSearchOne == 2) {
+                        Country[] countries1 = Country.getAllByContinent(inputLimit, inputString, countries);
 
+                            for (i = 0; i < countries1.length; i++) {
+                                for (j = 0; j < cities.length; j++) {
+                                    if (countries1[i].getCapitalCode() == cities[j].getId()) {
+                                        System.out.println(countries1[i].getCode() + " " + countries1[i].getName() + " " + countries1[i].getContinent() + " " + countries1[i].getRegion() + " " + countries1[i].getPopulation() + " " + cities[j].getName());
+                                    }
+                                }
+                            }
                     } else if(switchSearchOne == 3) {
+                        Country[] countries1 = Country.getAllByRegion(inputLimit, inputString, countries);
 
+                        for (i = 0; i < countries1.length; i++) {
+                            for (j = 0; j < cities.length; j++) {
+                                if (countries1[i].getCapitalCode() == cities[j].getId()) {
+                                    System.out.println(countries1[i].getCode() + " " + countries1[i].getName() + " " + countries1[i].getContinent() + " " + countries1[i].getRegion() + " " + countries1[i].getPopulation() + " " + cities[j].getName());
+                                }
+                            }
+                        }
                     }
                 } else if(switchCategoryOne == 2) {
                     if(switchSearchOne == 1) {

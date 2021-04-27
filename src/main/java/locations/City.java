@@ -269,7 +269,7 @@ public class City{
     public static City[] topNCities(int n, City[] cities){
         City[] new_cities = sortByPopulation(cities);
         int size = new_cities.length;
-        return Arrays.copyOfRange(new_cities,size-n, size);
+        return Arrays.copyOfRange(new_cities,0, n);
     }
     /*
    Bubble sort in ascending order
