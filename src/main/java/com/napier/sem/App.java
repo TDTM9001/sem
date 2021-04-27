@@ -291,32 +291,32 @@ public class App
                                 switchContinentOne = scan.nextInt();
                                 switch (switchContinentOne) {
                                     case 1:
-                                        inputString = "africa";
+                                        inputString = "Africa";
                                         inputCheck = true;
                                         break;
 
                                     case 2:
-                                        inputString = "asia";
+                                        inputString = "Asia";
                                         inputCheck = true;
                                         break;
 
                                     case 3:
-                                        inputString = "europe";
+                                        inputString = "Europe";
                                         inputCheck = true;
                                         break;
 
                                     case 4:
-                                        inputString = "north america";
+                                        inputString = "North America";
                                         inputCheck = true;
                                         break;
 
                                     case 5:
-                                        inputString = "oceania";
+                                        inputString = "Oceania";
                                         inputCheck = true;
                                         break;
 
                                     case 6:
-                                        inputString = "south america";
+                                        inputString = "South America";
                                         inputCheck = true;
                                         break;
 
@@ -358,7 +358,7 @@ public class App
                 }
 
                 inputCheck = false;
-                System.out.println("Please select Category to Sort by:");
+                System.out.println("Please select Option:");
                 System.out.println("1. Show all Results");
                 System.out.println("2. Limit to the top 'N' results");
 
@@ -423,9 +423,34 @@ public class App
                     }
                 } else if(switchCategoryOne == 2) {
                     if(switchSearchOne == 1) {
-
+                        City[] cities1 = City.sortByPopulation(cities);
+                        if(switchLimit == 1) {  //Checks if to show all results or to limit by 'N'
+                            for (i = 0; i < cities1.length; i++) {
+                                for (j = 0; j < countries.length; j++) {
+                                    if (cities1[i].getCountryCode().contentEquals(countries[j].getCode()) == true) {
+                                        System.out.println(cities1[i].getName() + " " + countries[j].getName() + " " + cities1[i].getDistrict() + " " + cities1[i].getPopulation());
+                                    }
+                                }
+                            }
+                        } else {
+                            for (i = 0; i < inputLimit; i++) {
+                                for (j = 0; j < countries.length; j++) {
+                                    if (cities1[i].getCountryCode().contentEquals(countries[j].getCode()) == true) {
+                                        System.out.println(cities1[i].getName() + " " + countries[j].getName() + " " + cities1[i].getDistrict() + " " + cities1[i].getPopulation());
+                                    }
+                                }
+                            }
+                        }
                     } else if(switchSearchOne == 2) {
+                        City[] cities1 = City.getAllByContinent(inputLimit, cities, inputString, countries);
 
+                            for (i = 0; i < cities1.length; i++) {
+                                for (j = 0; j < countries.length; j++) {
+                                    if (cities1[i].getCountryCode().contentEquals(countries[j].getCode()) == true) {
+                                        System.out.println(cities1[i].getName() + " " + countries[j].getName() + " " + cities1[i].getDistrict() + " " + cities1[i].getPopulation());
+                                    }
+                                }
+                            }
                     } else if(switchSearchOne == 3) {
 
                     } else if(switchSearchOne == 4) {
@@ -468,27 +493,27 @@ public class App
                         System.out.println("6. South America");
                         switch(switchContinentTwo) {
                             case 1:
-                                inputString = "africa";
+                                inputString = "Africa";
                                 break;
 
                             case 2:
-                                inputString = "asia";
+                                inputString = "Asia";
                                 break;
 
                             case 3:
-                                inputString = "europe";
+                                inputString = "Europe";
                                 break;
 
                             case 4:
-                                inputString = "north america";
+                                inputString = "North America";
                                 break;
 
                             case 5:
-                                inputString = "oceania";
+                                inputString = "Oceania";
                                 break;
 
                             case 6:
-                                inputString = "south america";
+                                inputString = "South America";
                                 break;
 
                             default:
