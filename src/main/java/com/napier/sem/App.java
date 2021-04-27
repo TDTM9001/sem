@@ -226,6 +226,7 @@ public class App
         int switchMain = 0;
         int i, j;
         Scanner scan = new Scanner(System.in);
+        scan.useDelimiter("\n");
         String inputString = "";
         Boolean inputCheck = false;
         switchMain = scan.nextInt();
