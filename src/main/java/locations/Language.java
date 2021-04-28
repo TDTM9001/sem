@@ -75,7 +75,7 @@ public class Language{
                 }
             }
         }
-        return null;
+        return sortMap(map);
     }
 
     /**
@@ -87,8 +87,8 @@ public class Language{
             HashMap<String, Float> passedMap) {
         List<String> mapKeys = new ArrayList<>(passedMap.keySet());
         List<Float> mapValues = new ArrayList<>(passedMap.values());
-        Collections.sort(mapValues);
-        Collections.sort(mapKeys);
+        Collections.sort(mapValues, Collections.reverseOrder());
+        Collections.sort(mapKeys, Collections.reverseOrder());
 
         LinkedHashMap<String, Float> sortedMap =
                 new LinkedHashMap<>();

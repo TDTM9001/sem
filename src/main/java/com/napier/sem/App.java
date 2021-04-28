@@ -4,6 +4,7 @@ import locations.*;
 
 import java.sql.*;
 import java.text.DecimalFormat;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Arrays;
 
@@ -696,6 +697,17 @@ public class App
                 break;
 
             case 3:  //Language Report
+                long population2 = 0;
+                double percentSpeaking;
+                HashMap<String, Float> languages1 = Language.showAllLanguage(countries, languages, "Top");
+                for(i = 0; i < countries.length; i++) {
+                    population2 += countries[i].getPopulation();
+                }
+                DecimalFormat df = new DecimalFormat("##.#");
+                for(String k : languages1.keySet()) {
+                    percentSpeaking = ((languages1.get(k) / population2) * 100);
+                    System.out.println(k + " " + Math.round(languages1.get(k)) + " " + df.format(percentSpeaking) + "%");
+                }
                 break;
 
             default:
