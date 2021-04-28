@@ -1,63 +1,59 @@
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
-
+import locations.*;
 
 class MyTest
 {
     @Test
-    void unitTest()
+    void cityTestSort()
     {
-        assertEquals(5, 5);
-    }
+        City testCity = new City("TestCity",1000, "ABC", 123,"Hampshire" );
+        City newTestCity = new City("NewTestCity", 500, "ZYX", 456, "Berkshire");
+        City finalTestCity = new City("FinalTestCity", 7250, "LMN", 789, "Devon");
 
-   /* @Test           //epic fail !
-    void unitTest2()
-    {
-        assertEquals(5, 4);
-    }*/
-
-    @Test
-    void unitTest3()
-    {
-        assertEquals(5, 5, "Messages are equal");
+        City[] arr = {testCity, finalTestCity, newTestCity};
+        City[] sorted = City.sortByPopulation(arr);
+        assertEquals(7250, sorted[0].getPopulation());
     }
 
     @Test
-    void unitTest4()
+    void cityTestDistrict()
     {
-        assertEquals(5.0, 5.01, 0.02);
+        City testCity = new City("TestCity",1000, "ABC", 123,"Hampshire" );
+        City newTestCity = new City("NewTestCity", 500, "ZYX", 456, "Berkshire");
+        City finalTestCity = new City("FinalTestCity", 7250, "LMN", 789, "Devon");
+        City anotherTestCity = new City("AnotherTestCity", 22500, "HAB", 157, "Hampshire");
+
+        City[] arr = {testCity, newTestCity, finalTestCity, anotherTestCity};
+        int counter = City.getAllByDistrict(0,arr,"Hampshire").length;
+        assertEquals(2, counter);
+
     }
 
     @Test
-    void unitTest5()
+    void countryTestSort()
     {
-        int[] a = {1, 2, 3};
-        int[] b = {1, 2, 3};
-        assertArrayEquals(a, b);
+        Country testCountry = new Country("TestCountry",1000, "ABC", "europe","South", 123);
+        Country newTestCountry = new Country("NewTestCountry", 500, "ZYX", "europe", "South", 123);
+        Country finalTestCountry = new Country("FinalTestCountry", 7250, "LMN", "america", "Britain", 123);
+
+        Country[] arr = {testCountry, newTestCountry, finalTestCountry};
+        Country[] sorted = Country.sortByPopulation(arr);
+
+        assertEquals(7250, sorted[0].getPopulation());
     }
 
     @Test
-    void unitTest6()
+    void countryTestContinent()
     {
-        assertTrue(5 == 5);
-    }
+        Country testCountry = new Country("TestCountry",1000, "ABC", "europe","South", 123);
+        Country newTestCountry = new Country("NewTestCountry", 500, "ZYX", "europe", "South", 123);
+        Country finalTestCountry = new Country("FinalTestCountry", 7250, "LMN", "america", "Britain", 123);
 
-    @Test
-    void unitTest7()
-    {
-        assertFalse(5 == 4);
-    }
+        Country[] arr = {testCountry, newTestCountry, finalTestCountry};
 
-    @Test
-    void unitTest8()
-    {
-        assertNull(null);
-    }
-
-    @Test
-    void unitTest9()
-    {
-        assertNotNull("Hello");
+        int counter = Country.getAllByContinent(0, "europe", arr).length;
+        assertEquals(2, counter);
     }
 
     @Test

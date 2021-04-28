@@ -11,6 +11,15 @@ public class City{
     private String name;
     private int population;
 
+
+    /**
+     *
+     * @param name
+     * @param population
+     * @param code
+     * @param id
+     * @param district
+     */
     public City(String name, int population, String code, int id, String district){
         this.name = name;
         this.population = population;
@@ -31,9 +40,13 @@ public class City{
         return this.district;
     }
 
-    /*
-    find capital code of each country, linear search until city code = capital code
-    return top n cities
+    /**
+     * find capital code of each country, linear search until city code = capital code
+     * return top n cities
+     * @param howMany
+     * @param countries
+     * @param cities
+     * @return allCapitals
      */
     public static City[] getAllCapitals(int howMany, Country[] countries, City[] cities) {
         City[] capitals_raw = new City[countries.length];
@@ -59,9 +72,15 @@ public class City{
             return topNCities(howMany, capitals);
         }
     }
-    /*
-    find capital code of each country in region, linear search until city code = capital code
-    return top n cities
+
+    /**
+     * find capital code of each country in region, linear search until city code = capital code
+     * return top n cities
+     * @param howMany
+     * @param countries
+     * @param cities
+     * @param region
+     * @return allCapitalsInRegion
      */
     public static City[] getAllCapitalsByRegion(int howMany, Country[] countries, City[] cities, String region){
         Country[] inRegion = Country.getAllByRegion(0,region, countries);
@@ -91,9 +110,15 @@ public class City{
             return null;
         }
     }
-    /*
-    find capital code of each country in continent, linear search until city code = capital code
-    return top n cities
+
+    /**
+     * find capital code of each country in continent, linear search until city code = capital code
+     * return top n cities
+     * @param howMany
+     * @param countries
+     * @param cities
+     * @param continent
+     * @return allCapitalsInContinent
      */
     public static City[] getAllCapitalsByContinent(int howMany, Country[] countries, City[] cities, String continent) {
         Country[] contCountries = Country.getAllByContinent(0, continent, countries);
@@ -125,8 +150,13 @@ public class City{
         return null;
     }
 
-    /*
-    find each city in country, in continent and return top n results
+    /**
+     * find each city in country, in continent and return top n results
+     * @param howMany
+     * @param cities
+     * @param continent
+     * @param countries
+     * @return allInContinent
      */
     public static City[] getAllByContinent(int howMany, City[] cities, String continent, Country[] countries) {
         ArrayList<City> inContinent = new ArrayList<City>();
@@ -153,8 +183,13 @@ public class City{
         }
     }
 
-    /*
-    find each city in country, in region and return top n results
+    /**
+     * find each city in country, in region and return top n results
+     * @param howMany
+     * @param cities
+     * @param region
+     * @param countries
+     * @return allInRegion
      */
     public static City[] getAllByRegion(int howMany, City[] cities, String region, Country[] countries) {
         ArrayList<City> inRegion = new ArrayList<City>();
@@ -180,9 +215,15 @@ public class City{
             return topNCities(howMany, regCities);
         }
     }
-    /*
-    Find country with name, and linear search through all cities matching country code
-    return n cities
+
+    /**
+     * Find country with name, and linear search through all cities matching country code
+     * return n cities
+     * @param howMany
+     * @param cities
+     * @param countryName
+     * @param countries
+     * @return allInCountry
      */
     public static City[] getAllByCountry(int howMany, City[] cities, String countryName, Country[] countries) {
         Country foundCountry = null;
@@ -211,8 +252,12 @@ public class City{
         }
     }
 
-    /*
-    find all cities with district, return n results
+    /**
+     * find all cities with district, return n results
+     * @param howMany
+     * @param cities
+     * @param district
+     * @return allInDistrict
      */
     public static City[] getAllByDistrict(int howMany, City[] cities, String district){
         ArrayList<City> foundCities = new ArrayList<City>();
@@ -230,17 +275,23 @@ public class City{
         }
     }
 
-    /*
-    Sorts array and returns top n elements
+    /**
+     * Sorts array and returns top n elements
+     * @param n
+     * @param cities
+     * @return nElements
      */
     public static City[] topNCities(int n, City[] cities){
         City[] new_cities = sortByPopulation(cities);
         int size = new_cities.length;
         return Arrays.copyOfRange(new_cities,0, n);
     }
-    /*
-   Bubble sort in ascending order
-    */
+
+    /**
+     * Bubble sort in ascending order
+     * @param cities
+     * @return sortedArr
+     */
     public static City[] sortByPopulation(City[] cities){
         int n = cities.length;
         for(int i=0; i<n-1; i++){
