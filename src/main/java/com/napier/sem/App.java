@@ -815,7 +815,7 @@ public class App
         App a = new App();
         String server_test = "mysql://127.0.0.1:3306/world?allowPublicKeyRetrieval=true&useSSL=false";
         String server_normal = "mysql://db:3306/world?allowPublicKeyRetrieval=true&useSSL=false";
-        String server_name = server_test;
+        String server_name = server_normal;
 
         City[] cities = a.GetCityData(server_name);
         System.out.println("Cities Added");
