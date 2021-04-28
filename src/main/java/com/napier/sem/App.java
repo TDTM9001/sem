@@ -2,6 +2,9 @@ package com.napier.sem;
 
 import locations.*;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.*;
 import java.text.DecimalFormat;
 import java.util.HashMap;
@@ -18,12 +21,13 @@ public class App
 
     /**
      * Connect to the MySQL database.
+     * @param server_name
      */
     public void connect(String server_name)
     {
         try
         {
-            // Load Database driver
+            // Load Database driver, crashes program if not found.
             Class.forName("com.mysql.cj.jdbc.Driver");
         }
         catch (ClassNotFoundException e)
@@ -76,9 +80,15 @@ public class App
         }
     }
 
+    /**
+     * Get Countries from database and put into array.
+     * @param server_name
+     * @return [countries] Array of countries.
+     */
+
     public Country[] GetCountryData(String server_name)
     {
-        connect(server_name);
+        connect(server_name);   //Connects to the server
         if (con != null)
         {
             Statement stmt;
@@ -86,7 +96,7 @@ public class App
             int length = 0;
             try {
                 stmt = con.createStatement();
-                rs = stmt.executeQuery("SELECT COUNT(*) FROM country");
+                rs = stmt.executeQuery("SELECT COUNT(*) FROM country"); //Counts how many countries there are, stores the number in length.
                 while(rs.next()){
                     length = rs.getInt(1);
                 }
@@ -97,16 +107,16 @@ public class App
                 System.out.println("SQLState: " + ex.getSQLState());
                 System.out.println("VendorError: " + ex.getErrorCode());
             }
-            Country[] countries = new Country[length];
+            Country[] countries = new Country[length];  //Makes an array of the exact length to fit all countries.
             disconnect();
-            connect(server_name);
+            connect(server_name);   //Reconnects to do new query.
             try {
                 stmt = con.createStatement();
-                rs = stmt.executeQuery("SELECT * FROM country");
+                rs = stmt.executeQuery("SELECT * FROM country");    //Selects all countries
                 int counter = 0;
-                while(rs.next()) {
+                while(rs.next()) {  //Iterates through each country, and creating a new country object for each of them.
                     Country temp = new Country(rs.getString("Name"), rs.getInt("Population"), rs.getString("Code"), rs.getString("Continent"), rs.getString("Region"), rs.getInt("Capital"));
-                    countries[counter] = temp;
+                    countries[counter] = temp;  //Stores the country object into array
                     counter++;
                 }
             }
@@ -124,9 +134,15 @@ public class App
         }
     }
 
+    /**
+     * Get Cities from database and put into array.
+     * @param server_name
+     * @return [cities] Array of cities.
+     */
+
     public City[] GetCityData(String server_name)
     {
-        connect(server_name);
+        connect(server_name);   //Connects to server.
         if (con != null)
         {
             Statement stmt;
@@ -134,7 +150,7 @@ public class App
             int length = 0;
             try {
                 stmt = con.createStatement();
-                rs = stmt.executeQuery("SELECT COUNT(*) FROM city");
+                rs = stmt.executeQuery("SELECT COUNT(*) FROM city");    //Counts how many cities there are, stores the number in length.
                 while(rs.next()){
                     length = rs.getInt(1);
                 }
@@ -145,16 +161,16 @@ public class App
                 System.out.println("SQLState: " + ex.getSQLState());
                 System.out.println("VendorError: " + ex.getErrorCode());
             }
-            City[] cities = new City[length];
+            City[] cities = new City[length];   //Makes an array of the exact length to fit all cities
             disconnect();
-            connect(server_name);
+            connect(server_name);   //Reconnects to do new query.
             try {
                 stmt = con.createStatement();
-                rs = stmt.executeQuery("SELECT * FROM city");
+                rs = stmt.executeQuery("SELECT * FROM city");   //Selects all cities
                 int counter = 0;
-                while(rs.next()) {
+                while(rs.next()) {  //Iterates through each city, and creating a new city object for each of them.
                     City temp = new City(rs.getString("Name"), rs.getInt("Population"), rs.getString("CountryCode"), rs.getInt("ID"), rs.getString("District"));
-                    cities[counter] = temp;
+                    cities[counter] = temp; //Stores the city object into array
                     counter++;
                 }
             }
@@ -172,9 +188,15 @@ public class App
         }
     }
 
+    /**
+     * Get Languages from database and put into array.
+     * @param server_name
+     * @return [languages] Array of languages.
+     */
+
     public Language[] GetLanguageData(String server_name)
     {
-        connect(server_name);
+        connect(server_name);   //Connects to server.
         if (con != null)
         {
             Statement stmt;
@@ -182,7 +204,7 @@ public class App
             int length = 0;
             try {
                 stmt = con.createStatement();
-                rs = stmt.executeQuery("SELECT COUNT(*) FROM countrylanguage");
+                rs = stmt.executeQuery("SELECT COUNT(*) FROM countrylanguage"); //Counts how many languages there are, stores the number in length.
                 rs.next();
                 length = rs.getInt(1);
             }
@@ -193,15 +215,15 @@ public class App
                 System.out.println("VendorError: " + ex.getErrorCode());
             }
             disconnect();
-            connect(server_name);
-            Language[] languages = new Language[length];
+            connect(server_name);   //Reconnects to do new query.
+            Language[] languages = new Language[length];    //Makes an array of the exact length to fit all languages
             try {
                 stmt = con.createStatement();
-                rs = stmt.executeQuery("SELECT * FROM countrylanguage");
+                rs = stmt.executeQuery("SELECT * FROM countrylanguage");    //Selects all languages
                 int counter = 0;
-                while(rs.next()) {
+                while(rs.next()) {  //Iterates through each language, and creating a new language object for each of them.
                     Language temp = new Language(rs.getString("CountryCode"), rs.getString("Language"), rs.getString("IsOfficial").equals("T"), rs.getFloat("Percentage"));
-                    languages[counter] = temp;
+                    languages[counter] = temp;  //Stores the language object into array
                     counter++;
                 }
             }
@@ -219,7 +241,7 @@ public class App
         }
     }
 
-    public static void menu(City[] cities, Country[] countries, Language[] languages){
+    public static void menu(City[] cities, Country[] countries, Language[] languages) throws IOException {
         System.out.println("Welcome to the Population Research App");  //Welcome message
         System.out.println("Please select a menu option:");
         System.out.println("1. Show Population from Largest to Smallest");
@@ -233,10 +255,20 @@ public class App
         String inputString = "";
         Boolean inputCheck = false;
         while(inputCheck == false) {  //Will keep looping until input validation check has passed
-            try {
-                switchMain = scan.nextInt();
-            } catch (InputMismatchException e) {  //Try/Catch block added, skips input if user types string instead of an int
-                scan.next();
+            int wait_time = 30;
+            BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+            long startTime = System.currentTimeMillis();
+            while ((System.currentTimeMillis() - startTime) < wait_time * 1000 && !in.ready()) {
+            }
+
+            if (in.ready()) {
+                try {
+                    switchMain = Integer.parseInt(in.readLine());
+                } catch (NumberFormatException e) {  //Try/Catch block added, skips input if user types string instead of an int
+                }
+            } else {
+                System.out.println("You did not enter an option in time.");
+                System.exit(0);
             }
             switch (switchMain) {
                 case 1:  //Show Population from Largest to Smallest
@@ -815,8 +847,7 @@ public class App
 
 
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) throws IOException {
         // Create new Application
         App a = new App();
         String server_test = "mysql://127.0.0.1:3306/world?allowPublicKeyRetrieval=true&useSSL=false";  //Test url
