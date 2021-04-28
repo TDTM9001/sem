@@ -452,19 +452,67 @@ public class App
                                 }
                             }
                     } else if(switchSearchOne == 3) {
+                        City[] cities1 = City.getAllByRegion(inputLimit, cities, inputString, countries);
 
+                        for (i = 0; i < cities1.length; i++) {
+                            for (j = 0; j < countries.length; j++) {
+                                if (cities1[i].getCountryCode().contentEquals(countries[j].getCode()) == true) {
+                                    System.out.println(cities1[i].getName() + " " + countries[j].getName() + " " + cities1[i].getDistrict() + " " + cities1[i].getPopulation());
+                                }
+                            }
+                        }
                     } else if(switchSearchOne == 4) {
+                        City[] cities1 = City.getAllByCountry(inputLimit, cities, inputString, countries);
 
+                        for (i = 0; i < cities1.length; i++) {
+                            for (j = 0; j < countries.length; j++) {
+                                if (cities1[i].getCountryCode().contentEquals(countries[j].getCode()) == true) {
+                                    System.out.println(cities1[i].getName() + " " + countries[j].getName() + " " + cities1[i].getDistrict() + " " + cities1[i].getPopulation());
+                                }
+                            }
+                        }
                     } else if(switchSearchOne == 5) {
+                        City[] cities1 = City.getAllByDistrict(inputLimit, cities, inputString);
 
+                        for (i = 0; i < cities1.length; i++) {
+                            for (j = 0; j < countries.length; j++) {
+                                if (cities1[i].getCountryCode().contentEquals(countries[j].getCode()) == true) {
+                                    System.out.println(cities1[i].getName() + " " + countries[j].getName() + " " + cities1[i].getDistrict() + " " + cities1[i].getPopulation());
+                                }
+                            }
+                        }
                     }
                 } else if(switchCategoryOne == 3) {
                     if(switchSearchOne == 1) {
+                        City[] cities1 = City.getAllCapitals(inputLimit, countries, cities);
 
+                        for (i = 0; i < cities1.length; i++) {
+                            for (j = 0; j < countries.length; j++) {
+                                if (cities1[i].getCountryCode().contentEquals(countries[j].getCode()) == true) {
+                                    System.out.println(cities1[i].getName() + " " + countries[j].getName() + " " + cities1[i].getDistrict() + " " + cities1[i].getPopulation());
+                                }
+                            }
+                        }
                     } else if(switchSearchOne == 2) {
+                        City[] cities1 = City.getAllCapitalsByContinent(inputLimit, countries, cities, inputString);
 
+                        for (i = 0; i < cities1.length; i++) {
+                            for (j = 0; j < countries.length; j++) {
+                                if (cities1[i].getCountryCode().contentEquals(countries[j].getCode()) == true) {
+                                    System.out.println(cities1[i].getName() + " " + countries[j].getName() + " " + cities1[i].getDistrict() + " " + cities1[i].getPopulation());
+                                }
+                            }
+                        }
                     } else if(switchSearchOne == 3) {
+                        City[] cities1 = City.getAllCapitalsByRegion(inputLimit, countries, cities, inputString);
 
+                        for (i = 0; i < cities1.length; i++) {
+                            for (j = 0; j < countries.length; j++) {
+                                if (cities1[i].getCountryCode().contentEquals(countries[j].getCode()) == true) {
+                                    System.out.println(cities1[i].getName() + " " + countries[j].getName() + " " + cities1[i].getDistrict() + " " + cities1[i].getPopulation());
+                                }
+                            }
+                        }
                     }
                 }
                 break;

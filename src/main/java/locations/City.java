@@ -117,40 +117,16 @@ public class City{
         ArrayList<City> inContinent = new ArrayList<City>();
         final Country[] tempCountry = new Country[1];
 
-        // Concurrent threads used as multiple O(n) linear search used
-        // on large data sets, at the same time
-        Thread findCities = new Thread(){
-            @Override
-            public void run(){
-                for(City c : cities){
-                    if(c.getCountryCode().equals(tempCountry[0].getCode())){
-                        inContinent.add(c);
-                    }
-                }
-                notifyAll();
-            }
-        };
-
-        Thread loopCountries = new Thread(){
-            @Override
-            public void run(){
-                for(Country c : countries){
+       for(Country c : countries){
                     if(c.getContinent().equals(continent)){
                         tempCountry[0] = c;
-                        if(Thread.activeCount() >= 4){
-                            try {
-                                wait();
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
+                        for(City ci : cities){
+                            if(ci.getCountryCode().equals(tempCountry[0].getCode())){
+                                inContinent.add(ci);
                             }
                         }
-                        findCities.run();
                     }
                 }
-            }
-        };
-
-        loopCountries.start();
 
         City[] contCities = new City[inContinent.size()];
         contCities = inContinent.toArray(contCities);
@@ -169,40 +145,16 @@ public class City{
         ArrayList<City> inRegion = new ArrayList<City>();
         final Country[] tempCountry = new Country[1];
 
-        // Concurrent threads used as multiple O(n) linear search used
-        // on large data sets, at the same time
-        Thread findCities = new Thread(){
-            @Override
-            public void run(){
-                for(City c : cities){
-                    if(c.getCountryCode().equals(tempCountry[0].getCode())){
-                        inRegion.add(c);
-                    }
-                }
-                notifyAll();
-            }
-        };
-
-        Thread loopCountries = new Thread(){
-            @Override
-            public void run(){
-                for(Country c : countries){
+       for(Country c : countries){
                     if(c.getRegion().equals(region)){
                         tempCountry[0] = c;
-                        if(Thread.activeCount() >= 4){
-                            try {
-                                wait();
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
+                        for(City ci : cities){
+                            if(ci.getCountryCode().equals(tempCountry[0].getCode())){
+                                inRegion.add(ci);
                             }
                         }
-                        findCities.run();
                     }
-                }
-            }
-        };
-
-        loopCountries.start();
+                };
 
         City[] regCities = new City[inRegion.size()];
         regCities = inRegion.toArray(regCities);
