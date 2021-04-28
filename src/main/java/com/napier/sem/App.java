@@ -2,6 +2,9 @@ package com.napier.sem;
 
 import locations.*;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.*;
 import java.text.DecimalFormat;
 import java.util.HashMap;
@@ -219,7 +222,7 @@ public class App
         }
     }
 
-    public static void menu(City[] cities, Country[] countries, Language[] languages){
+    public static void menu(City[] cities, Country[] countries, Language[] languages) throws IOException {
         System.out.println("Welcome to the Population Research App");  //Welcome message
         System.out.println("Please select a menu option:");
         System.out.println("1. Show Population from Largest to Smallest");
@@ -233,10 +236,20 @@ public class App
         String inputString = "";
         Boolean inputCheck = false;
         while(inputCheck == false) {
-            try {
-                switchMain = scan.nextInt();
-            } catch (InputMismatchException e) {
-                scan.next();
+            int wait_time = 30;
+            BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+            long startTime = System.currentTimeMillis();
+            while ((System.currentTimeMillis() - startTime) < wait_time * 1000 && !in.ready()) {
+            }
+
+            if (in.ready()) {
+                try {
+                    switchMain = Integer.parseInt(in.readLine());
+                } catch (NumberFormatException e) {
+                }
+            } else {
+                System.out.println("You did not enter an option in time.");
+                System.exit(0);
             }
             switch (switchMain) {
                 case 1:  //Show Population from Largest to Smallest
@@ -809,8 +822,7 @@ public class App
 
 
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) throws IOException {
         // Create new Application
         App a = new App();
         String server_test = "mysql://127.0.0.1:3306/world?allowPublicKeyRetrieval=true&useSSL=false";
