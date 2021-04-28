@@ -36,18 +36,23 @@ public class City{
     return top n cities
      */
     public static City[] getAllCapitals(int howMany, Country[] countries, City[] cities) {
-        City[] capitals = new City[countries.length];
+        City[] capitals_raw = new City[countries.length];
         int index = 0;
 
         for(Country c : countries){
-            for(City ci : cities){
-                if(c.getCapitalCode() == ci.getId()){
-                    capitals[index] = ci;
-                    break;
+            if(c.getCapitalCode() != 0) {
+                for (City ci : cities) {
+                    if (c.getCapitalCode() == ci.getId()) {
+                        capitals_raw[index] = ci;
+                        break;
+                    }
                 }
+                index++;
             }
-            index++;
         }
+
+        City[] capitals = Arrays.copyOf(capitals_raw, index);
+
         if(howMany == 0) {
             return sortByPopulation(capitals);
         }else{
@@ -62,16 +67,21 @@ public class City{
         Country[] inRegion = Country.getAllByRegion(0,region, countries);
 
         if (inRegion != null) {
-            City[] capitals = new City[inRegion.length];
+            City[] capitals_raw = new City[inRegion.length];
             int index = 0;
             for(Country c : inRegion){
-                for(City ci : cities){
-                    if(c.getCapitalCode() == ci.getId()){
-                        capitals[index] = ci;
+                if(c.getCapitalCode() != 0) {
+                    for (City ci : cities) {
+                        if (c.getCapitalCode() == ci.getId()) {
+                            capitals_raw[index] = ci;
+                        }
                     }
+                    index++;
                 }
-                index++;
             }
+
+            City[] capitals = Arrays.copyOf(capitals_raw, index);
+
             if(howMany == 0){
                 return sortByPopulation(capitals);
             }else{
@@ -90,16 +100,21 @@ public class City{
         City[] contCities = getAllByContinent(0,cities, continent, countries);
 
         if (contCountries != null) {
-            City[] capitals = new City[contCountries.length];
+            City[] capitals_raw = new City[contCountries.length];
             int index = 0;
             for(Country c : contCountries){
-                for(City ci : contCities){
-                    if(c.getCapitalCode() == ci.getId()){
-                        capitals[index] = ci;
+                if(c.getCapitalCode() != 0) {
+                    for (City ci : contCities) {
+                        if (c.getCapitalCode() == ci.getId()) {
+                            capitals_raw[index] = ci;
+                        }
                     }
+                    index++;
                 }
-                index++;
             }
+
+            City[] capitals = Arrays.copyOf(capitals_raw, index);
+
             if(howMany == 0){
                 return sortByPopulation(capitals);
             }else{

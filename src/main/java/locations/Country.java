@@ -120,7 +120,7 @@ public class Country{
         }
         // If c.continent = continent then add to arrlist
         for(Country c : countries){
-            if(c.getContinent().toLowerCase().equals((continent))){
+            if(c.getContinent().equals((continent))){
                 found_countries.add(c);
             }
         }
