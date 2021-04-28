@@ -229,13 +229,13 @@ public class App
         int switchMain = 0;
         int i, j;
         Scanner scan = new Scanner(System.in);
-        scan.useDelimiter("\n");
+        scan.useDelimiter("\n");  //Scanner delimiter is changed as default is " " (space)
         String inputString = "";
         Boolean inputCheck = false;
-        while(inputCheck == false) {
+        while(inputCheck == false) {  //Will keep looping until input validation check has passed
             try {
                 switchMain = scan.nextInt();
-            } catch (InputMismatchException e) {
+            } catch (InputMismatchException e) {  //Try/Catch block added, skips input if user types string instead of an int
                 scan.next();
             }
             switch (switchMain) {
@@ -449,7 +449,7 @@ public class App
                                     }
                                 }
                             }
-                        } else if (switchSearchOne == 2) {
+                        } else if (switchSearchOne == 2) {  //Show countries in a continent from largest to smallest
                             Country[] countries1 = Country.getAllByContinent(inputLimit, inputString, countries);
 
                             for (i = 0; i < countries1.length; i++) {
@@ -459,7 +459,7 @@ public class App
                                     }
                                 }
                             }
-                        } else if (switchSearchOne == 3) {
+                        } else if (switchSearchOne == 3) {  //Show countries in a Region from largest to smallest
                             Country[] countries1 = Country.getAllByRegion(inputLimit, inputString, countries);
 
                             for (i = 0; i < countries1.length; i++) {
@@ -471,7 +471,7 @@ public class App
                             }
                         }
                     } else if (switchCategoryOne == 2) {
-                        if (switchSearchOne == 1) {
+                        if (switchSearchOne == 1) {  //Show cities in the world from largest to smallest
                             City[] cities1 = City.sortByPopulation(cities);
                             if (switchLimit == 1) {  //Checks if to show all results or to limit by 'N'
                                 for (i = 0; i < cities1.length; i++) {
@@ -490,7 +490,7 @@ public class App
                                     }
                                 }
                             }
-                        } else if (switchSearchOne == 2) {
+                        } else if (switchSearchOne == 2) {  //Show cities in a continent from largest to smallest
                             City[] cities1 = City.getAllByContinent(inputLimit, cities, inputString, countries);
 
                             for (i = 0; i < cities1.length; i++) {
@@ -500,7 +500,7 @@ public class App
                                     }
                                 }
                             }
-                        } else if (switchSearchOne == 3) {
+                        } else if (switchSearchOne == 3) {  //Show cities in a Region from largest to smallest
                             City[] cities1 = City.getAllByRegion(inputLimit, cities, inputString, countries);
 
                             for (i = 0; i < cities1.length; i++) {
@@ -510,7 +510,7 @@ public class App
                                     }
                                 }
                             }
-                        } else if (switchSearchOne == 4) {
+                        } else if (switchSearchOne == 4) {  //Show cities in a Country from largest to smallest
                             City[] cities1 = City.getAllByCountry(inputLimit, cities, inputString, countries);
 
                             for (i = 0; i < cities1.length; i++) {
@@ -520,7 +520,7 @@ public class App
                                     }
                                 }
                             }
-                        } else if (switchSearchOne == 5) {
+                        } else if (switchSearchOne == 5) {  //Show cities in a District from largest to smallest
                             City[] cities1 = City.getAllByDistrict(inputLimit, cities, inputString);
 
                             for (i = 0; i < cities1.length; i++) {
@@ -532,7 +532,7 @@ public class App
                             }
                         }
                     } else if (switchCategoryOne == 3) {
-                        if (switchSearchOne == 1) {
+                        if (switchSearchOne == 1) {  //Show capital cities in the world from largest to smallest
                             City[] cities1 = City.getAllCapitals(inputLimit, countries, cities);
 
                             for (i = 0; i < cities1.length; i++) {
@@ -542,7 +542,7 @@ public class App
                                     }
                                 }
                             }
-                        } else if (switchSearchOne == 2) {
+                        } else if (switchSearchOne == 2) {  //Show capital cities in a Continent from largest to smallest
                             City[] cities1 = City.getAllCapitalsByContinent(inputLimit, countries, cities, inputString);
 
                             for (i = 0; i < cities1.length; i++) {
@@ -552,7 +552,7 @@ public class App
                                     }
                                 }
                             }
-                        } else if (switchSearchOne == 3) {
+                        } else if (switchSearchOne == 3) {  //Show capital cities in a Region from largest to smallest
                             City[] cities1 = City.getAllCapitalsByRegion(inputLimit, countries, cities, inputString);
 
                             for (i = 0; i < cities1.length; i++) {
@@ -708,18 +708,19 @@ public class App
                         }
                     }
 
-                    if (switchCategoryTwo == 1) {
+                    if (switchCategoryTwo == 1) {  //Show Population of the World
                         for (i = 0; i < countries.length; i++) {
                             population += countries[i].getPopulation();
                         }
                         for (j = 0; j < cities.length; j++) {
                             cityPopulation += cities[j].getPopulation();
                         }
-                        percentInCities = (((float) cityPopulation / population) * 100);
+                        percentInCities = (((float) cityPopulation / population) * 100);  //Calculates percentage of people living in cities and not living in cities
                         percentNotInCities = (((float) (population - cityPopulation) / population) * 100);
-                        DecimalFormat df = new DecimalFormat("##.#");
+                        DecimalFormat df = new DecimalFormat("##.#");  //Rounds percentage to one decimal point
                         System.out.println("World " + population + " " + df.format(percentInCities) + "% " + df.format(percentNotInCities) + "%");
-                    } else if (switchCategoryTwo == 2) {
+
+                    } else if (switchCategoryTwo == 2) {  //Show Population of a Continent
                         for (i = 0; i < countries.length; i++) {
                             if (countries[i].getContinent().contentEquals(inputString)) {
                                 population += countries[i].getPopulation();
@@ -736,7 +737,8 @@ public class App
                         percentNotInCities = (((float) (population - cityPopulation) / population) * 100);
                         DecimalFormat df = new DecimalFormat("##.#");
                         System.out.println(inputString + " " + population + " " + df.format(percentInCities) + "% " + df.format(percentNotInCities) + "%");
-                    } else if (switchCategoryTwo == 3) {
+
+                    } else if (switchCategoryTwo == 3) {  //Show Population of a Region
                         for (i = 0; i < countries.length; i++) {
                             if (countries[i].getRegion().equalsIgnoreCase(inputString)) {
                                 population += countries[i].getPopulation();
@@ -753,7 +755,8 @@ public class App
                         percentNotInCities = (((float) (population - cityPopulation) / population) * 100);
                         DecimalFormat df = new DecimalFormat("##.#");
                         System.out.println(inputString + " " + population + " " + df.format(percentInCities) + "% " + df.format(percentNotInCities) + "%");
-                    } else if (switchCategoryTwo == 4) {
+
+                    } else if (switchCategoryTwo == 4) {  //Show Population of a Country
                         for (i = 0; i < countries.length; i++) {
                             if (countries[i].getName().equalsIgnoreCase(inputString)) {
                                 population = countries[i].getPopulation();
@@ -770,34 +773,37 @@ public class App
                         percentNotInCities = (((float) (population - cityPopulation) / population) * 100);
                         DecimalFormat df = new DecimalFormat("##.#");
                         System.out.println(inputString + " " + population + " " + df.format(percentInCities) + "% " + df.format(percentNotInCities) + "%");
-                    } else if (switchCategoryTwo == 5) {
+
+                    } else if (switchCategoryTwo == 5) {  //Show Population of a District
                         for (i = 0; i < cities.length; i++) {
                             if (cities[i].getDistrict().equalsIgnoreCase(inputString)) {
                                 population += cities[i].getPopulation();
                             }
                         }
                         System.out.println(inputString + " " + population);
-                    } else if (switchCategoryTwo == 6) {
+
+                    } else if (switchCategoryTwo == 6) {  //Show Population of a City
                         for (i = 0; i < cities.length; i++) {
                             if (cities[i].getName().equalsIgnoreCase(inputString)) {
                                 population = cities[i].getPopulation();
                             }
                         }
                         System.out.println(inputString + " " + population);
+
                     }
                     break;
 
                 case 3:  //Language Report
                     long population2 = 0;
                     double percentSpeaking;
-                    HashMap<String, Float> languages1 = Language.showAllLanguage(countries, languages, "Top");
+                    HashMap<String, Float> languages1 = Language.showAllLanguage(countries, languages, "Top");  //"Top" argument returns the five required languages
                     for (i = 0; i < countries.length; i++) {
                         population2 += countries[i].getPopulation();
                     }
-                    DecimalFormat df = new DecimalFormat("##.#");
+                    DecimalFormat df = new DecimalFormat("##.#");  //Rounds to one decimal place
                     for (String k : languages1.keySet()) {
-                        percentSpeaking = ((languages1.get(k) / population2) * 100);
-                        System.out.println(k + " " + Math.round(languages1.get(k)) + " " + df.format(percentSpeaking) + "%");
+                        percentSpeaking = ((languages1.get(k) / population2) * 100);  //Calculates percentage of world who speaks language
+                        System.out.println(k + " " + Math.round(languages1.get(k)) + " " + df.format(percentSpeaking) + "%");  //Math.round is used to display so number of speakers isn't in scientific notation
                     }
                     break;
 
@@ -813,15 +819,15 @@ public class App
     {
         // Create new Application
         App a = new App();
-        String server_test = "mysql://127.0.0.1:3306/world?allowPublicKeyRetrieval=true&useSSL=false";
-        String server_normal = "mysql://db:3306/world?allowPublicKeyRetrieval=true&useSSL=false";
+        String server_test = "mysql://127.0.0.1:3306/world?allowPublicKeyRetrieval=true&useSSL=false";  //Test url
+        String server_normal = "mysql://db:3306/world?allowPublicKeyRetrieval=true&useSSL=false";  //Normal url
         String server_name = server_normal;
 
-        City[] cities = a.GetCityData(server_name);
+        City[] cities = a.GetCityData(server_name);  //Add city data
         System.out.println("Cities Added");
-        Country[] countries = a.GetCountryData(server_name);
+        Country[] countries = a.GetCountryData(server_name);  //Add country data
         System.out.println("Countries Added");
-        Language[] languages = a.GetLanguageData(server_name);
+        Language[] languages = a.GetLanguageData(server_name);  //Add language data
         System.out.println("Languages Added");
 
         menu(cities,countries,languages);
