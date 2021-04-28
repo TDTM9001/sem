@@ -3,6 +3,7 @@ package com.napier.sem;
 import locations.*;
 
 import java.sql.*;
+import java.text.DecimalFormat;
 import java.util.Scanner;
 import java.util.Arrays;
 
@@ -520,6 +521,9 @@ public class App
             case 2:  //Population of a given Category
                 int switchCategoryTwo = 0;
                 int switchContinentTwo = 0;
+                long population = 0;
+                long cityPopulation = 0;
+                double percentInCities, percentNotInCities;
                 System.out.println("Please select which Category:");
                 System.out.println("1. Show Population of the World");
                 System.out.println("2. Show Population of a Continent");
@@ -527,70 +531,167 @@ public class App
                 System.out.println("4. Show Population of a Country");
                 System.out.println("5. Show Population of a District");
                 System.out.println("6. Show Population of a City");
-                switch(switchCategoryTwo) {
-                    case 1:
-                        break;
 
-                    case 2:
-                        System.out.println("Please select which Continent:");
-                        System.out.println("1. Africa");
-                        System.out.println("2. Asia");
-                        System.out.println("3. Europe");
-                        System.out.println("4. North America");
-                        System.out.println("5. Oceania");
-                        System.out.println("6. South America");
-                        switch(switchContinentTwo) {
-                            case 1:
-                                inputString = "Africa";
-                                break;
+                while(inputCheck == false) {
+                    switchCategoryTwo = scan.nextInt();
+                    switch (switchCategoryTwo) {
+                        case 1:
+                            inputCheck = true;
+                            break;
 
-                            case 2:
-                                inputString = "Asia";
-                                break;
+                        case 2:
+                            System.out.println("Please select which Continent:");
+                            System.out.println("1. Africa");
+                            System.out.println("2. Asia");
+                            System.out.println("3. Europe");
+                            System.out.println("4. North America");
+                            System.out.println("5. Oceania");
+                            System.out.println("6. South America");
 
-                            case 3:
-                                inputString = "Europe";
-                                break;
+                            while(inputCheck == false) {
+                                switchContinentTwo = scan.nextInt();
+                                switch (switchContinentTwo) {
+                                    case 1:
+                                        inputString = "Africa";
+                                        inputCheck = true;
+                                        break;
 
-                            case 4:
-                                inputString = "North America";
-                                break;
+                                    case 2:
+                                        inputString = "Asia";
+                                        inputCheck = true;
+                                        break;
 
-                            case 5:
-                                inputString = "Oceania";
-                                break;
+                                    case 3:
+                                        inputString = "Europe";
+                                        inputCheck = true;
+                                        break;
 
-                            case 6:
-                                inputString = "South America";
-                                break;
+                                    case 4:
+                                        inputString = "North America";
+                                        inputCheck = true;
+                                        break;
 
-                            default:
-                                System.out.println("Error: Invalid Input");
+                                    case 5:
+                                        inputString = "Oceania";
+                                        inputCheck = true;
+                                        break;
+
+                                    case 6:
+                                        inputString = "South America";
+                                        inputCheck = true;
+                                        break;
+
+                                    default:
+                                        System.out.println("Error: Invalid Input");
+                                }
+                            }
+                            break;
+
+                        case 3:
+                            System.out.println("Please enter which Region:");
+                            inputString = scan.next();
+                            inputCheck = true;
+                            break;
+
+                        case 4:
+                            System.out.println("Please enter which Country:");
+                            inputString = scan.next();
+                            inputCheck = true;
+                            break;
+
+                        case 5:
+                            System.out.println("Please enter which District:");
+                            inputString = scan.next();
+                            inputCheck = true;
+                            break;
+
+                        case 6:
+                            System.out.println("Please enter which City:");
+                            inputString = scan.next();
+                            inputCheck = true;
+                            break;
+
+                        default:
+                            System.out.println("Error: Invalid Input");
+                    }
+                }
+
+                if(switchCategoryTwo == 1) {
+                    for(i = 0; i < countries.length; i++) {
+                        population += countries[i].getPopulation();
+                    }
+                    for(j = 0; j < cities.length; j++) {
+                        cityPopulation += cities[j].getPopulation();
+                    }
+                    percentInCities = (((float)cityPopulation / population) * 100);
+                    percentNotInCities = (((float)(population - cityPopulation) / population) * 100);
+                    DecimalFormat df = new DecimalFormat("##.#");
+                    System.out.println("World " + population + " " + df.format(percentInCities) + "% " + df.format(percentNotInCities) + "%");
+                } else if(switchCategoryTwo == 2) {
+                    for(i = 0; i < countries.length; i++) {
+                        if(countries[i].getContinent().contentEquals(inputString)) {
+                            population += countries[i].getPopulation();
                         }
-                        break;
-
-                    case 3:
-                        System.out.println("Please enter which Region:");
-                        inputString = scan.next();
-                        break;
-
-                    case 4:
-                        System.out.println("Please enter which Country:");
-                        inputString = scan.next();
-                        break;
-
-                    case 5:
-                        System.out.println("Please enter which District:");
-                        inputString = scan.next();
-                        break;
-
-                    case 6:
-                        System.out.println("Please enter which City:");
-                        inputString = scan.next();
-                        break;
-
-                    default:
-                        System.out.println("Error: Invalid Input");
+                    }
+                    for(i = 0; i < cities.length; i++) {
+                        for(j = 0; j < countries.length; j++) {
+                            if(countries[j].getCode().contentEquals(cities[i].getCountryCode()) && countries[j].getContinent().contentEquals(inputString)) {
+                                cityPopulation += cities[i].getPopulation();
+                            }
+                        }
+                    }
+                    percentInCities = (((float)cityPopulation / population) * 100);
+                    percentNotInCities = (((float)(population - cityPopulation) / population) * 100);
+                    DecimalFormat df = new DecimalFormat("##.#");
+                    System.out.println(inputString + " " + population + " " + df.format(percentInCities) + "% " + df.format(percentNotInCities) + "%");
+                } else if(switchCategoryTwo == 3) {
+                    for(i = 0; i < countries.length; i++) {
+                        if(countries[i].getRegion().equalsIgnoreCase(inputString)) {
+                            population += countries[i].getPopulation();
+                        }
+                    }
+                    for(i = 0; i < cities.length; i++) {
+                        for(j = 0; j < countries.length; j++) {
+                            if(countries[j].getCode().contentEquals(cities[i].getCountryCode()) && countries[j].getRegion().equalsIgnoreCase(inputString)) {
+                                cityPopulation += cities[i].getPopulation();
+                            }
+                        }
+                    }
+                    percentInCities = (((float)cityPopulation / population) * 100);
+                    percentNotInCities = (((float)(population - cityPopulation) / population) * 100);
+                    DecimalFormat df = new DecimalFormat("##.#");
+                    System.out.println(inputString + " " + population + " " + df.format(percentInCities) + "% " + df.format(percentNotInCities) + "%");
+                } else if(switchCategoryTwo == 4) {
+                    for(i = 0; i < countries.length; i++) {
+                        if(countries[i].getName().equalsIgnoreCase(inputString)) {
+                            population = countries[i].getPopulation();
+                        }
+                    }
+                    for(i = 0; i < cities.length; i++) {
+                        for(j = 0; j < countries.length; j++) {
+                            if(countries[j].getCode().contentEquals(cities[i].getCountryCode()) && countries[j].getName().equalsIgnoreCase(inputString)) {
+                                cityPopulation += cities[i].getPopulation();
+                            }
+                        }
+                    }
+                    percentInCities = (((float)cityPopulation / population) * 100);
+                    percentNotInCities = (((float)(population - cityPopulation) / population) * 100);
+                    DecimalFormat df = new DecimalFormat("##.#");
+                    System.out.println(inputString + " " + population + " " + df.format(percentInCities) + "% " + df.format(percentNotInCities) + "%");
+                } else if(switchCategoryTwo == 5) {
+                    for(i = 0; i < cities.length; i++) {
+                        if(cities[i].getDistrict().equalsIgnoreCase(inputString)) {
+                            population += cities[i].getPopulation();
+                        }
+                    }
+                    System.out.println(inputString + " " + population);
+                } else if(switchCategoryTwo == 6) {
+                    for(i = 0; i < cities.length; i++) {
+                        if(cities[i].getName().equalsIgnoreCase(inputString)) {
+                            population = cities[i].getPopulation();
+                        }
+                    }
+                    System.out.println(inputString + " " + population);
                 }
                 break;
 
