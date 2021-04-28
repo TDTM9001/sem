@@ -852,7 +852,7 @@ public class App
         App a = new App();
         String server_test = "mysql://127.0.0.1:3306/world?allowPublicKeyRetrieval=true&useSSL=false";  //Test url
         String server_normal = "mysql://db:3306/world?allowPublicKeyRetrieval=true&useSSL=false";  //Normal url
-        String server_name = server_test;
+        String server_name = server_normal;
 
         City[] cities = a.GetCityData(server_name);  //Add city data
         System.out.println("Cities Added");
