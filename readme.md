@@ -4,8 +4,9 @@ READMEEEEEEE
 
 - Master Build Status [![Build Status](https://travis-ci.com/TDTM9001/sem.svg?branch=master)](https://travis-ci.org/TDTM9001/sem)
 - Develop Build Status [![Build Status](https://travis-ci.com/TDTM9001/sem.svg?branch=develop)](https://travis-ci.org/TDTM9001/sem)
-- License [![LICENSE](https://img.shields.io/github/license/TDTM9001/sem.svg?style=flat-square)](https://github.com/TDTM9001/sem/blob/master/LICENSE)
-- Release [![Releases](https://img.shields.io/github/release/TDTM9001/sem/all.svg?style=flat-square)](https://github.com/TDTM9001/sem/releases)
+- Code Coverage [![codecov](https://codecov.io/gh/TDTM9001/sem/branch/master/graph/badge.svg?token=9R6U9QMHUU)](https://codecov.io/gh/TDTM9001/sem)
+- License [![LICENSE](https://img.shields.io/github/license/TDTM9001/sem.svg)](https://github.com/TDTM9001/sem/blob/master/LICENSE)
+- Release [![Releases](https://img.shields.io/github/release/TDTM9001/sem/all.svg)](https://github.com/TDTM9001/sem/releases)
 
 | ID    | Name | Met  | Screenshot |
 |-------|------|------|------------|
