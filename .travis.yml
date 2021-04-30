@@ -9,6 +9,10 @@ addons:
 services:
   - docker
 
+env:
+  global:
+    - CODECOV_TOKEN=:637b3dbb-1375-4572-9587-7b788931e6e7
+
 install:
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
@@ -47,7 +51,7 @@ jobs:
         # This is the token we set before
         api_key: $GITHUB_OAUTH_TOKEN
         # Copy built JAR file to release.  JAR built in $TRAVIS_BUILD_DIR/target
-        file: $TRAVIS_BUILD_DIR/target/seMethods.jar
+        file: $TRAVIS_BUILD_DIR/target/seMethods-final-jar-with-dependencies.jar
         skip_cleanup: true
         script: docker-compose up --abort-on-container-exit
 

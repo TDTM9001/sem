@@ -78,6 +78,9 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.2</version>
+                <configuration>
+                    <dataFile>${basedir}/target/jacoco.exec</dataFile>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>
