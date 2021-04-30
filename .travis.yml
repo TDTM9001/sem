@@ -58,5 +58,5 @@ stages:
     if: branch = master
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -s https://codecov.io/bash -f target/site/jacoco/jacoco.xml)
   - echo "It Works!"
