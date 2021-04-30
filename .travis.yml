@@ -9,10 +9,6 @@ addons:
 services:
   - docker
 
-env:
-  global:
-    - CODECOV_TOKEN=:637b3dbb-1375-4572-9587-7b788931e6e7
-
 install:
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
